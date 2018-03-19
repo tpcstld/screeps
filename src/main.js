@@ -19,8 +19,6 @@ const loopSpawn = require('loop.spawn');
 const loopStats = require('loop.stats');
 
 module.exports.loop = function () {
-    loopStats.run();
-
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             delete Memory.creeps[i];
@@ -44,4 +42,6 @@ module.exports.loop = function () {
         const tower = towers[name];
         ROLES["tower"].run(tower);
     }
+
+    loopStats.run();
 }

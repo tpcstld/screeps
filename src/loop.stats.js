@@ -9,7 +9,10 @@ const loopStats = {
 
         Memory.stats = {
           storedEnergy: _.sum(containers, s => s.store.energy),
-          cpu: Game.cpu,
+          cpu: {
+            bucket: Game.cpu.bucket,
+            used: Game.cpu.getUsed()
+          },
           gcl: Game.gcl,
         };
     }
