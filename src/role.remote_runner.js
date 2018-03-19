@@ -47,12 +47,12 @@ let roleRemoteRunner = {
             }
         }
         return;
-        
-        
+
+
         if (creep.memory.state === undefined) {
             creep.memory.state = "toRemoteContainer";
         }
-        
+
         if (creep.memory.state === "toRemoteContainer") {
             let flag = Game.flags[FLAG_EXTERNAL_MINE];
             if (flag.room === undefined || flag.room.name !== creep.room.name) {
@@ -67,30 +67,30 @@ let roleRemoteRunner = {
                     }
                 }
             }
-            
+
             if (creep.carry.energy >= creep.carryCapacity) {
                 const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: s => s.structureType === STRUCTURE_CONTAINER
                 });
-                
+
                 creep.memory.state = "goBack";
             }
         }
-        
+
         if (creep.memory.state === "repairContainer") {
             const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: s => s.structureType === STRUCTURE_CONTAINER
             });
-            
+
             if (creep.repair(container) == ERR_NOT_IN_RANGE) {
                 creep.travelTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
-            
+
             if (!container || container.hits >= container.hitsMax) {
                 creep.memory.state = "toRemoteContainer";
             }
         }
-        
+
         if (creep.memory.state === "goBack") {
             let flag = Game.flags[FLAG_HOME];
             if (flag.room === undefined || flag.room.name !== creep.room.name) {
@@ -107,7 +107,7 @@ let roleRemoteRunner = {
                     }
                 }
             }
-            
+
             if (creep.carry.energy == 0) {
                 creep.memory.state = "toRemoteContainer";
             }

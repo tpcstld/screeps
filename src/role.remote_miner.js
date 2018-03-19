@@ -16,12 +16,12 @@ let roleRemoteMiner = {
             utilsHarvest.harvestRandom(creep, 1);
         }
         return;
-        
-        
+
+
         const containers = creep.room.find(FIND_STRUCTURES, {
             filter: s => s.structureType === STRUCTURE_CONTAINER
         });
-        
+
         if (creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;
             creep.say('mining');
@@ -34,7 +34,7 @@ let roleRemoteMiner = {
         } else {
             creep.memory.working = false;
         }
-        
+
         if (creep.memory.working) {
             if (containers.length === 0) {
                 const sites = creep.room.find(FIND_CONSTRUCTION_SITES, {

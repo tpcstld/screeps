@@ -5,7 +5,7 @@ var roleUpgrader = {
     /** @param {Creep} creep **/
     run: function(creep) {
         var state = creep.memory.state || 'gather';
-        
+
         if (state == 'gather') {
             utilsHarvest.getEnergyFromContainers(creep);
             if (creep.carry.energy >= creep.carryCapacity) {

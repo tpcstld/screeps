@@ -1,7 +1,7 @@
 const utilsFind = require('utils.find');
 
 const loopStats = {
-    
+
     run: function() {
         const containers = utilsFind.findInEveryRoom(FIND_STRUCTURES, {
             filter: s => s.structureType === STRUCTURE_CONTAINER
