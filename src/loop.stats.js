@@ -15,7 +15,7 @@ const loopStats = {
           },
           gcl: Game.gcl,
           creeps: {
-            roles: _.countBy(Game.creeps, c => c.memory.role);
+            roles: _.countBy(Game.creeps, c => c.memory.role)
           },
         };
     }
