@@ -1,5 +1,5 @@
 const loopSpawn = {
-    
+
     NUM_TYPES: [
         {type: 'attack', num: () => 0},
         {type: 'heal', num: () => 0},
@@ -13,7 +13,7 @@ const loopSpawn = {
         {type: 'remoteRunner', num: () => 2},
         {type: 'general', num: () => 0},
     ],
-    
+
     KITS: {
         'upgrade': [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
         'build': [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
@@ -27,7 +27,7 @@ const loopSpawn = {
         'heal': [HEAL, HEAL, MOVE],
         'general': [WORK, CARRY, MOVE],
     },
-    
+
     run: function(spawn) {
         let nextCreepType = this.getNextCreepType();
         if (nextCreepType) {
@@ -38,20 +38,20 @@ const loopSpawn = {
             });
         }
     },
-    
+
     getNextCreepType: function() {
         let creepsCount = _.countBy(Game.creeps, c => c.memory.role);
-        
+
         // Avoid dead base.
         if (Object.keys(creepsCount).length <= 1) {
             if (!creepsCount["general"] || creepsCount["general"] < 3) {
                 return "general";
             }
         }
-        
+
         for (let index in this.NUM_TYPES) {
             const creepType = this.NUM_TYPES[index];
-            
+
             if (creepType.num() === 0) {
                 continue;
             }
