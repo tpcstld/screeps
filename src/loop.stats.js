@@ -28,11 +28,15 @@ const loopStats = {
       const spawnStructures = room.find(FIND_STRUCTURES, {
           filter: s => s.structureType === STRUCTURE_EXTENSION || s.structureType === STRUCTURE_SPAWN
       });
+      const stores = room.find(FIND_STRUCTURES, {
+          filter: s => s.structureType === STRUCTURE_CONTAINER || s.structureType === STRUCTURE_STORAGE
+      });
 
       const droppedResources = room.find(FIND_DROPPED_RESOURCES);
 
       return {
         spawnEnergy: _.sum(spawnStructures, s => s.energy),
+        storedEnergy: _.sum(stores, s => s.store.energy),
         droppedEnergy: _.sum(droppedResources, r => r.amount),
       };
     }
