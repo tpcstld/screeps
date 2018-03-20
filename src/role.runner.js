@@ -22,6 +22,11 @@ const roleRunner = {
             var target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
                 filter: r => r.amount >= 40 && r.amount >= (creep.carryCapacity * utilsLoad.getTargetCount(creep, r, "take") + 1)
             });
+            if (!target) {
+              target = creep.pos.findClosestByPath(FIND_TOMBSTONES, {
+                  filter: t => _.sum(t.store) >= 40 && _.sum(t.store) >= (creep.carryCapacity * utilsLoad.getTargetCount(creep, r, "take") + 1)
+              });
+            }
             if (target) {
                 if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
                     creep.travelTo(target);
