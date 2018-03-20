@@ -1,3 +1,7 @@
+const PROTOTYPES = [
+  require('prototype.movement'),
+];
+
 const ROLES = {
     "upgrade": require('role.upgrader'),
     "build": require("role.builder"),

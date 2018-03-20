@@ -29,7 +29,7 @@ const roleRunner = {
                 utilsLoad.claimTarget(creep, target, "take");
             } else {
                 utilsLoad.clearTarget(creep);
-                utilsMovement.moveToIdle(creep);
+                creep.idle();
             }
         }
     }
