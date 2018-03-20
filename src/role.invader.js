@@ -42,13 +42,11 @@ const roleInvader = {
           return;
         }
 
-        // Hit Spawns
-        const spawn = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-            filter: s => s.structureType == STRUCTURE_SPAWN
-        });
-        if (spawn) {
-          if (creep.attack(spawn) == ERR_NOT_IN_RANGE) {
-            creep.travelTo(spawn);
+        // Hit hostile structures
+        const enemyStructure = creep.pos.findClosestByPath(FIND_HOSTILE_STRUCTURES);
+        if (enemyStructure) {
+          if (creep.attack(enemyStructure) == ERR_NOT_IN_RANGE) {
+            creep.travelTo(enemyStructure);
           }
           return;
         }
