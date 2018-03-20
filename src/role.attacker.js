@@ -1,5 +1,3 @@
-const constants = require('utils.constants');
-
 const roleAttacker = {
 
     /** @param {Creep} creep **/

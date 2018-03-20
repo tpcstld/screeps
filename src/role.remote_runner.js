@@ -20,7 +20,7 @@ let roleRemoteRunner = {
         if (creep.memory.working) {
             let flag = Game.flags[FLAG_HOME];
             if (flag.room === undefined || flag.room.name !== creep.room.name) {
-                creep.travelTo(flag.pos, {visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.travelTo(flag.pos);
             } else {
                 const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: s => s.structureType === STRUCTURE_CONTAINER
