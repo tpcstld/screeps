@@ -12,7 +12,7 @@ const loopSpawn = {
         {type: 'remoteMine', num: (spawn) => 1},
         {type: 'remoteRunner', num: (spawn) => 2},
         {type: 'general', num: (spawn) => 0},
-        {type: 'invader', num: (spawn) => 1},
+        {type: 'invader', num: (spawn) => _.max(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0) / 5},
     ],
 
     KITS: {
