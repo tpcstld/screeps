@@ -3,3 +3,8 @@ Creep.prototype.idle = function() {
       stuckValue: 8
   });
 };
+
+Creep.prototype.refund = function() {
+  const spawn = Game.spawns["Spawn1"];
+  this.travelTo(spawn);
+}

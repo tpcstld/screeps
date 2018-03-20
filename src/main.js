@@ -38,6 +38,9 @@ module.exports.loop = function () {
 
     for (let name in Game.creeps) {
         let creep = Game.creeps[name];
+        if (creep.memory.refund) {
+            creep.refund();
+        }
         if (creep.memory.role) {
             ROLES[creep.memory.role].run(creep);
         }
