@@ -36,9 +36,7 @@ const roleRepairer = {
                 }
                 utilsLoad.claimTarget(creep, targets[0], 'repair');
             } else {
-                creep.travelTo(Game.flags["Idle"].pos, {
-                    stuckValue: 8
-                });
+                creep.idle();
                 utilsLoad.clearTarget(creep);
             }
         } else {

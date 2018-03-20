@@ -23,8 +23,6 @@ let roleBuilder = {
             if (!utilsHarvest.getEnergyFromContainers(creep)) {
                 utilsHarvest.harvestRandom(creep, 4);
             }
-            //    creep.travelTo(Game.flags["Idle"].pos);
-            //}
         }
     }
 };

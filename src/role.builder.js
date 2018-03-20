@@ -22,7 +22,7 @@ let roleBuilder = {
             utilsEnergy.placeEnergy(creep);
         } else {
             if (!utilsHarvest.getEnergyFromContainers(creep)) {
-                creep.travelTo(Game.flags["Idle"].pos);
+                creep.idle();
             }
         }
     }

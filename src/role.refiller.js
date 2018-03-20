@@ -20,11 +20,11 @@ let roleRefiller = {
 
         if (creep.memory.building) {
             if (!utilsEnergy.maybeRefillEnergy(creep)) {
-                creep.travelTo(Game.flags["Idle"].pos);
+                creep.idle();
             }
         } else {
             if (!utilsHarvest.getEnergyFromContainers(creep, true)) {
-                creep.travelTo(Game.flags["Idle"].pos);
+                creep.idle();
             }
         }
     }
