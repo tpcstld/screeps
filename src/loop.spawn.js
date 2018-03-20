@@ -2,7 +2,7 @@ const loopSpawn = {
 
     NUM_TYPES: [
         {type: 'refill', num: (spawn) => 1},
-        {type: 'invader', num: (spawn) => 2}, //_.max(_.map(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0)) / 5},
+        {type: 'invader', num: (spawn) => _.max(_.map(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0)) / 5},
         {type: 'attack', num: (spawn) => 0},
         {type: 'heal', num: (spawn) => 0},
         {type: 'mine', num: (spawn) => 2},

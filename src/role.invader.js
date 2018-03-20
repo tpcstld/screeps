@@ -43,7 +43,10 @@ const roleInvader = {
         }
 
         // Hit hostile structures
-        const enemyStructure = creep.pos.findClosestByPath(FIND_HOSTILE_STRUCTURES);
+        const enemyStructure = creep.pos.findClosestByPath(FIND_HOSTILE_STRUCTURES, {
+            filter: s => s.structureType !== STRUCTURE_CONTROLLER
+        });
+
         if (enemyStructure) {
           if (creep.attack(enemyStructure) == ERR_NOT_IN_RANGE) {
             creep.travelTo(enemyStructure);
