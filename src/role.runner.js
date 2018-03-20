@@ -28,6 +28,9 @@ const roleRunner = {
                 utilsLoad.claimTarget(creep, target, "take");
             } else {
                 utilsLoad.clearTarget(creep);
+                creep.travelTo(Game.flags["Idle"].pos, {
+                    stuckValue: 8
+                });
             }
         }
     }
