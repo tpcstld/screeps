@@ -52,6 +52,15 @@ const roleInvader = {
           }
           return;
         }
+
+        // Hit creeps
+        const enemyCreep = creep.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
+        if (enemyCreep) {
+          if (creep.attack(enemyCreep) == ERR_NOT_IN_RANGE) {
+            creep.travelTo(enemyCreep);
+          }
+          return;
+        }
     }
 };
 
