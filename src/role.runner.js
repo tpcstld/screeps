@@ -23,7 +23,7 @@ const roleRunner = {
             });
             if (target) {
                 if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
-                    creep.travelTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                    creep.travelTo(target);
                 }
                 utilsLoad.claimTarget(creep, target, "take");
             } else {
