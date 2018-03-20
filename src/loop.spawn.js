@@ -1,17 +1,17 @@
 const loopSpawn = {
 
     NUM_TYPES: [
-        {type: 'attack', num: () => 0},
-        {type: 'heal', num: () => 0},
-        {type: 'refill', num: () => 1},
-        {type: 'mine', num: () => 2},
-        {type: 'build', num: () => 2},
-        {type: 'upgrade', num: () => Math.ceil(Memory.stats.storedEnergy / 2000)},
-        {type: 'run', num: () => 1},
-        {type: 'repair', num: () => 2},
-        {type: 'remoteMine', num: () => 1},
-        {type: 'remoteRunner', num: () => 2},
-        {type: 'general', num: () => 0},
+        {type: 'attack', num: (spawn) => 0},
+        {type: 'heal', num: (spawn) => 0},
+        {type: 'refill', num: (spawn) => 1},
+        {type: 'mine', num: (spawn) => 2},
+        {type: 'build', num: (spawn) => 2},
+        {type: 'upgrade', num: (spawn) => Math.ceil(Memory.stats.storedEnergy / 2000)},
+        {type: 'run', num: (spawn) => Math.ceil(Memory.stats.rooms[spawn.room.name].droppedEnergy / 2000)},
+        {type: 'repair', num: (spawn) => 2},
+        {type: 'remoteMine', num: (spawn) => 1},
+        {type: 'remoteRunner', num: (spawn) => 2},
+        {type: 'general', num: (spawn) => 0},
     ],
 
     KITS: {
@@ -29,7 +29,7 @@ const loopSpawn = {
     },
 
     run: function(spawn) {
-        let nextCreepType = this.getNextCreepType();
+        let nextCreepType = this.getNextCreepType(spawn);
         if (nextCreepType) {
             spawn.spawnCreep(this.KITS[nextCreepType], "Bot" + Game.time, {
                 memory: {
@@ -39,7 +39,7 @@ const loopSpawn = {
         }
     },
 
-    getNextCreepType: function() {
+    getNextCreepType: function(spawn) {
         let creepsCount = _.countBy(Game.creeps, c => c.memory.role);
 
         // Avoid dead base.
@@ -52,10 +52,10 @@ const loopSpawn = {
         for (let index in this.NUM_TYPES) {
             const creepType = this.NUM_TYPES[index];
 
-            if (creepType.num() === 0) {
+            if (creepType.num(spawn) === 0) {
                 continue;
             }
-            if (creepsCount[creepType.type] === undefined || creepsCount[creepType.type] < creepType.num()) {
+            if (creepsCount[creepType.type] === undefined || creepsCount[creepType.type] < creepType.num(spawn)) {
                 return creepType.type;
             }
         }
