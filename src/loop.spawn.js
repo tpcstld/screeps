@@ -32,6 +32,16 @@ const loopSpawn = {
     },
 
     run: function(spawn) {
+        this.markRefund(spawn);
+
+        const refundCreeps = spawn.pos.findInRange(FIND_MY_CREEPS, 1, {
+            filter: c => c.memory.refund
+        });
+        for (let name in refundCreeps) {
+            const creep = refundCreeps[name];
+            spawn.recycleCreep(creep);
+        }
+
         let nextCreepType = this.getNextCreepType(spawn);
         if (nextCreepType) {
             spawn.spawnCreep(this.KITS[nextCreepType], "Bot" + Game.time, {
@@ -63,6 +73,22 @@ const loopSpawn = {
             }
         }
         return null;
+    },
+
+    markRefund: function(spawn) {
+        let creepsByRole = _.groupBy(Game.creeps, c => c.memory.role);
+        for (let role in creepsByRole) {
+            const creeps = creepsByRole[role];
+            const count = creeps.length;
+            const difference = this.NUM_ROLES[role] - count;
+
+            for (let xx = 0; xx < count; xx++) {
+                creeps[xx].memory.refund = false;
+                if (xx < difference) {
+                  creeps[xx].memory.refund = true;
+                }
+            }
+        }
     }
 }
 module.exports = loopSpawn;
