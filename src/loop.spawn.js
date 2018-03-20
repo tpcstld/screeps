@@ -26,6 +26,8 @@ const loopSpawn = {
         'remoteRunner': [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
         'heal': [HEAL, HEAL, MOVE],
         'general': [WORK, CARRY, MOVE],
+        'invader': new Array(20).fill(TOUGH).concat(new Array(10).fill(ATTACK)).concat(new Array(5).fill(MOVE)),
+        'invaderHeal': [HEAL, HEAL, HEAL, HEAL, MOVE, MOVE, MOVE, MOVE],
     },
 
     run: function(spawn) {

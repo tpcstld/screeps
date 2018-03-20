@@ -10,6 +10,8 @@ const ROLES = {
     'general': require('role.general'),
     'heal': require('role.healer'),
     'refill': require('role.refiller'),
+    'invader': require('role.invader'),
+    'invaderHeal': require('role.invader_healer'),
     'tower': require('role.tower'),
 };
 
