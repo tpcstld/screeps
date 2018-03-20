@@ -80,7 +80,7 @@ const loopSpawn = {
         for (let role in creepsByRole) {
             const creeps = creepsByRole[role];
             const count = creeps.length;
-            const difference = _.filter(this.NUM_TYPES, t => t.type == role)[0].num - count;
+            const difference = count - _.filter(this.NUM_TYPES, t => t.type == role)[0].num;
 
             for (let xx = 0; xx < count; xx++) {
                 creeps[xx].memory.refund = false;
