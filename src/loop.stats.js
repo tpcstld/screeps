@@ -23,7 +23,7 @@ const loopStats = {
 
     getStatsForRoom: function(room) {
       const spawnStructures = room.find(FIND_STRUCTURES, {
-          filter: s.structureType === STRUCTURE_EXTENSION || s.structureType === STRUCTURE_SPAWN
+          filter: s => s.structureType === STRUCTURE_EXTENSION || s.structureType === STRUCTURE_SPAWN
       });
 
       return {
