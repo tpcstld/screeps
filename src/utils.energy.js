@@ -11,7 +11,9 @@ let utilsEnergy = {
         }
 
         creep.upgradeController(creep.room.controller);
-        creep.travelTo(creep.room.controller, {visualizePathStyle: {stroke: constants.COLOR_WORK_PATH}});
+        creep.travelTo(creep.room.controller, {
+            stuckValue: 8
+        });
         return true;
     },
 

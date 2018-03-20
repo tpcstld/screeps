@@ -14,7 +14,10 @@ var roleUpgrader = {
         }
         if (state == 'upgrade') {
             creep.upgradeController(creep.room.controller);
-            creep.travelTo(creep.room.controller);
+            creep.travelTo(creep.room.controller, {
+                stuckValue: 8
+            });
+
             if (creep.carry.energy == 0) {
                 state = 'gather';
             }
