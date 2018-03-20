@@ -29,8 +29,11 @@ const loopStats = {
           filter: s => s.structureType === STRUCTURE_EXTENSION || s.structureType === STRUCTURE_SPAWN
       });
 
+      const droppedResources = room.find(FIND_DROPPED_RESOURCES);
+
       return {
-        spawnEnergy: _.sum(spawnStructures, s => s.energy)
+        spawnEnergy: _.sum(spawnStructures, s => s.energy),
+        droppedEnergy: _.sum(droppedResources, r => r.amount),
       };
     }
 };
