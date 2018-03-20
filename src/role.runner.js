@@ -1,5 +1,6 @@
 const utilsLoad = require('utils.load');
 const utilsEnergy = require('utils.energy');
+const utilsMovement = require('utils.movement');
 
 const roleRunner = {
 
@@ -28,9 +29,7 @@ const roleRunner = {
                 utilsLoad.claimTarget(creep, target, "take");
             } else {
                 utilsLoad.clearTarget(creep);
-                creep.travelTo(Game.flags["Idle"].pos, {
-                    stuckValue: 8
-                });
+                utilsMovement.moveToIdle(creep);
             }
         }
     }
