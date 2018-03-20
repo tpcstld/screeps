@@ -17,7 +17,18 @@ const loopStats = {
           creeps: {
             roles: _.countBy(Game.creeps, c => c.memory.role)
           },
+          rooms: _.mapValues(Game.rooms, r => this.getStatsForRoom(r))
         };
+    },
+
+    getStatsForRoom: function(room) {
+      const spawnStructures = room.find(FIND_STRUCTURES, {
+          filter: s.structureType === STRUCTURE_EXTENSION || s.structureType === STRUCTURE_SPAWN
+      });
+
+      return {
+        spawnEnergy: _.sum(spawnStructures, s => s.energy)
+      };
     }
 };
 
