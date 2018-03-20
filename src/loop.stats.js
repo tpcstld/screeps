@@ -13,6 +13,9 @@ const loopStats = {
             bucket: Game.cpu.bucket,
             used: Game.cpu.getUsed()
           },
+          memory: {
+            used: RawMemory.get().length
+          },
           gcl: Game.gcl,
           creeps: {
             roles: _.countBy(Game.creeps, c => c.memory.role)
