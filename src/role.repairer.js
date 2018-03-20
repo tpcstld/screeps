@@ -24,7 +24,7 @@ const roleRepairer = {
 
             targets = _.sortBy(targets, t => {
                 let result = t.hits * 1.0 / t.hitsMax;
-                if (utilsLoad.isCreepTarget(creep, t) && result !== 1) {
+                if (utilsLoad.isCreepTarget(creep, t) && result < 0.99) {
                     return 0;
                 }
                 return result;
@@ -36,7 +36,9 @@ const roleRepairer = {
                 }
                 utilsLoad.claimTarget(creep, targets[0], 'repair');
             } else {
-                creep.travelTo(new RoomPosition(27, 23, creep.room.name));
+                creep.travelTo(Game.flags["Idle"].pos, {
+                    stuckValue: 8
+                });
                 utilsLoad.clearTarget(creep);
             }
         } else {
