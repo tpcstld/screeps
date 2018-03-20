@@ -40,6 +40,7 @@ module.exports.loop = function () {
         let creep = Game.creeps[name];
         if (creep.memory.refund) {
             creep.refund();
+            continue;
         }
         if (creep.memory.role) {
             ROLES[creep.memory.role].run(creep);
