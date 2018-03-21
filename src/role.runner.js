@@ -18,17 +18,21 @@ const roleRunner = {
             utilsLoad.clearTarget(creep);
         } else {
             let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
-                filter: r => r.amount >= 40 && r.amount >= (creep.carryCapacity * utilsLoad.getTargetCount(creep, r, "take") + 1)
+                filter: r => r.amount >= 40 && r.amount >= (creep.carryCapacity * (utilsLoad.getTargetCount(creep, r, "take") + 1))
             });
             if (!target) {
               target = creep.pos.findClosestByPath(FIND_TOMBSTONES, {
-                  filter: t => _.sum(t.store) >= Math.max((creep.carryCapacity * utilsLoad.getTargetCount(creep, t, "take") + 1), 1)
+                  filter: t => _.sum(t.store) >= Math.max(creep.carryCapacity * (utilsLoad.getTargetCount(creep, t, "take") + 1), 1)
               });
             }
             if (!target) {
-              target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                  filter: s => s.structureType === STRUCTURE_CONTAINER && _.sum(s.store) > 40
+              let containers = creep.room.find(FIND_STRUCTURES, {
+                  filter: s => s.structureType === STRUCTURE_CONTAINER
               });
+              if (containers.length > 0) {
+                containers = _.sort(containers, c => _.sum(c.store) - (creep.carryCapacity * (utilsLoad.getTargetCount(creep, t, "take") + 1)));
+                target = containers[0];
+              }
             }
             if (target) {
                 if (creep.pickup(target) == ERR_NOT_IN_RANGE || creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
