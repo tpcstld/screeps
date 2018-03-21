@@ -38,14 +38,15 @@ let utilsEnergy = {
     },
 
     maybeRefillEnergy: function(creep) {
-        if (this.maybeEnergizeSpawns(creep)
-            || this.maybeEnergizeExtensions(creep)
-            || this.maybeEnergizeTowers(creep)) {
-            return true;
-        }
+      if (this.maybeEnergizeSpawns(creep)
+          || this.maybeEnergizeExtensions(creep)
+          || this.maybeEnergizeTowers(creep)
+          || this.maybeEnergizeLinks(creep)) {
+        return true;
+      }
 
-        utilsLoad.clearTarget(creep);
-        return false;
+      utilsLoad.clearTarget(creep);
+      return false;
     },
 
     maybeEnergizeSpawns: function(creep) {
@@ -81,6 +82,21 @@ let utilsEnergy = {
             filter: s => s.structureType === STRUCTURE_TOWER && s.energy < s.energyCapacity
         });
 
+        const target = creep.pos.findClosestByPath(targets);
+        if (target) {
+            if (this.transferEnergyTo(creep, target)) {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    maybeEnergizeLinks: function(creep) {
+        const targets = utilsLoad.findAvailableTargets(creep, 1, "charge", FIND_STRUCTURES, {
+            filter: s => s.structureType == STRUCTURE_LINK
+              && s.energy < s.energyCapacity
+              && s.id == creep.room.memory.sourceLink
+        });
         const target = creep.pos.findClosestByPath(targets);
         if (target) {
             if (this.transferEnergyTo(creep, target)) {
