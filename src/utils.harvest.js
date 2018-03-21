@@ -24,7 +24,7 @@ let utilsHarvest = {
         if (target) {
             utilsLoad.claimTarget(creep, target, "take");
             if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.travelTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.travelTo(target);
             }
             return true;
         }
@@ -33,7 +33,7 @@ let utilsHarvest = {
 
         let flag = Game.flags["Home"];
         if (flag.room === undefined || flag.room.name !== creep.room.name) {
-            creep.travelTo(flag.pos, {visualizePathStyle: {stroke: '#ffaa00'}});
+            creep.travelTo(flag.pos);
             return true;
         }
         return false;

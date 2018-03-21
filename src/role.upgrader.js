@@ -7,7 +7,15 @@ var roleUpgrader = {
         var state = creep.memory.state || 'gather';
 
         if (state == 'gather') {
-            utilsHarvest.getEnergyFromContainers(creep);
+            const nearbyLinks = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+                s => s.structureType == STRUCTURE_LINK
+            });
+            if (nearbyLinks.length > 0) {
+                creep.withdraw(nearbyLinks[0], RESOURCE_ENERGY);
+            } else {
+                utilsHarvest.getEnergyFromContainers(creep);
+            }
+
             if (creep.carry.energy >= creep.carryCapacity) {
                 state = 'upgrade';
             }
