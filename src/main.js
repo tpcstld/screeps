@@ -17,6 +17,7 @@ const ROLES = {
     'invader': require('role.invader'),
     'invaderHeal': require('role.invader_healer'),
     'tower': require('role.tower'),
+    'link': require('role.link'),
 };
 
 var Traveler = require('Traveler');
@@ -51,6 +52,12 @@ module.exports.loop = function () {
     for (let name in towers) {
         const tower = towers[name];
         ROLES["tower"].run(tower);
+    }
+
+    const links = _.filter(Game.structures, s => s.structureType == STRUCTURE_LINK);
+    for (let name in links) {
+        const link = links[name];
+        ROLES["link"].run(link);
     }
 
     loopStats.run();

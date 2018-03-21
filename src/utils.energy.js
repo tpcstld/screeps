@@ -95,7 +95,7 @@ let utilsEnergy = {
         const targets = utilsLoad.findAvailableTargets(creep, 1, "charge", FIND_STRUCTURES, {
             filter: s => s.structureType == STRUCTURE_LINK
               && s.energy < s.energyCapacity
-              && s.id == creep.room.memory.sourceLink
+              && s.id == creep.room.memory.sourceLinkId
         });
         const target = creep.pos.findClosestByPath(targets);
         if (target) {
