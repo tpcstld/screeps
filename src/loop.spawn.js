@@ -20,7 +20,7 @@ const loopSpawn = {
             if (storage.length > 0) {
               energy = energy + roomStats.containerEnergy;
             }
-            return Math.max(Math.ceil(energy / 2000), 1);
+            return Math.max(Math.ceil(energy / 2000), loopSpawn.NUM_TYPES["mine"].num(spawn));
           }
         },
         {type: 'repair', num: (spawn) => 2},
