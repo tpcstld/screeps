@@ -35,7 +35,7 @@ const loopStats = {
 
       return {
         storageEnergy: _.sum(storages, s => s.store.energy),
-        containerEnergy: _.sum(containers, s => store.energy),
+        containerEnergy: _.sum(containers, c => c.store.energy),
         spawnEnergy: _.sum(spawnStructures, s => s.energy),
         droppedEnergy: _.sum(droppedResources, r => r.amount),
         numEnemies: Object.keys(enemies).length
