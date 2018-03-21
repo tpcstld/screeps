@@ -126,8 +126,10 @@ let utilsEnergy = {
           });
         }
         if (target) {
-            if (creep.transfer(target, RESOURCE_ALL) == ERR_NOT_IN_RANGE) {
+            for (const resourceType in creep.carry) {
+              if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
                 creep.travelTo(target);
+              }
             }
             return true;
         }
