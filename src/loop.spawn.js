@@ -8,7 +8,7 @@ const loopSpawn = {
         {type: 'heal', num: (spawn) => 0},
         {type: 'mine', num: (spawn) => 2},
         {type: 'build', num: (spawn) => 2},
-        {type: 'upgrade', num: (spawn) => Math.min(Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].storageEnergy / 2000), 1), 4)},
+        {type: 'upgrade', num: (spawn) => Math.min(Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].storageEnergy / 2000), 1), 3)},
         {type: 'run', num: (spawn) => {
             const storage = spawn.room.find(FIND_STRUCTURES, {
                 filter: s => s.structureType === STRUCTURE_STORAGE
