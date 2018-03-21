@@ -93,7 +93,7 @@ let utilsEnergy = {
     transferEnergyTo: function(creep, building) {
         if (building.energy !== undefined && building.energy < building.energyCapacity) {
             if (creep.transfer(building, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.travelTo(building, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.travelTo(building);
             }
             utilsLoad.claimTarget(creep, building, "charge");
             return true;
@@ -102,12 +102,17 @@ let utilsEnergy = {
     },
 
     dropAtContainer: function(creep) {
-        const target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-            filter: s => s.structureType === STRUCTURE_CONTAINER && _.sum(s.store) < s.storeCapacity
+        let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            filter: s => s.structureType === STRUCTURE_STORAGE && _.sum(s.store) < s.storeCapacity
         });
+        if (!target) {
+          target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+              filter: s => s.structureType === STRUCTURE_CONTAINER && _.sum(s.store) < s.storeCapacity
+          });
+        }
         if (target) {
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.travelTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.travelTo(target);
             }
             return true;
         }

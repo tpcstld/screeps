@@ -34,8 +34,7 @@ const utilsLoad = {
 
     isCreepTarget: function(creep, target) {
         return creep.memory.targetId == target.id;
-    }
-
+    },
 };
 
 module.exports = utilsLoad;

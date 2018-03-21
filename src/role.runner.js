@@ -19,12 +19,17 @@ const roleRunner = {
             utilsEnergy.dropAtContainer(creep);
             utilsLoad.clearTarget(creep);
         } else {
-            var target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
+            let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
                 filter: r => r.amount >= 40 && r.amount >= (creep.carryCapacity * utilsLoad.getTargetCount(creep, r, "take") + 1)
             });
             if (!target) {
               target = creep.pos.findClosestByPath(FIND_TOMBSTONES, {
                   filter: t => _.sum(t.store) >= Math.max((creep.carryCapacity * utilsLoad.getTargetCount(creep, t, "take") + 1), 1)
+              });
+            }
+            if (!target) {
+              target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                  filter: s => s.structureType === STRUCTURE_CONTAINER && _.sum(s.store) > 40
               });
             }
             if (target) {
