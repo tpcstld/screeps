@@ -81,6 +81,10 @@ const loopSpawn = {
             const creeps = creepsByRole[role];
             const type = this.getRoleType(role);
 
+            if (!type.refundable) {
+              continue;
+            }
+
             const count = creeps.length;
             const difference = count - type.num(spawn);
 
