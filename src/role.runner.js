@@ -30,7 +30,7 @@ const roleRunner = {
                   filter: s => s.structureType === STRUCTURE_CONTAINER
               });
               if (containers.length > 0) {
-                containers = _.sort(containers, c => _.sum(c.store) - (creep.carryCapacity * (utilsLoad.getTargetCount(creep, t, "take") + 1)));
+                containers = _.sortBy(containers, c => _.sum(c.store) - (creep.carryCapacity * (utilsLoad.getTargetCount(creep, t, "take") + 1)));
                 target = containers[0];
               }
             }
