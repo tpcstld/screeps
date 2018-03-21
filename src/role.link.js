@@ -2,7 +2,7 @@
 const roleLink = {
 
   run: function(link) {
-    if (link.room.sourceLinkId != link.id) {
+    if (link.room.memory.sourceLinkId != link.id) {
       return;
     }
 
