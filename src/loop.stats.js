@@ -29,6 +29,7 @@ const loopStats = {
       const containers = room.find(FIND_STRUCTURES, {
           filter: s => s.structureType === STRUCTURE_CONTAINER
       });
+      const constructionSites = room.find(FIND_CONSTRUCTION_SITES);
       const enemies = room.find(FIND_HOSTILE_CREEPS);
 
       const droppedResources = room.find(FIND_DROPPED_RESOURCES);
@@ -38,6 +39,7 @@ const loopStats = {
         containerEnergy: _.sum(containers, c => c.store.energy),
         spawnEnergy: _.sum(spawnStructures, s => s.energy),
         droppedEnergy: _.sum(droppedResources, r => r.amount),
+        numConstructionSites: Object.keys(constructionSites).length,
         numEnemies: Object.keys(enemies).length
       };
     }
