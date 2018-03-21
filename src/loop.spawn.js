@@ -8,7 +8,8 @@ const loopSpawn = {
         {type: 'heal', num: (spawn) => 0},
         {type: 'mine', num: (spawn) => 2},
         {type: 'build', num: (spawn) => 2},
-        {type: 'upgrade', num: (spawn) => Math.min(Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].storageEnergy / 2000), 1), 3)},
+        {type: 'upgrade', num: (spawn) => 2},
+        // Math.min(Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].storageEnergy / 2000), 1), 3)},
         {type: 'run', num: (spawn) => {
             const storage = spawn.room.find(FIND_STRUCTURES, {
                 filter: s => s.structureType === STRUCTURE_STORAGE
@@ -29,7 +30,7 @@ const loopSpawn = {
     ],
 
     KITS: {
-        'upgrade': [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
+        'upgrade': [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE, MOVE],
         'build': [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
         'repair': [WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE],
         'mine': [WORK, WORK, WORK, WORK, WORK, MOVE],
