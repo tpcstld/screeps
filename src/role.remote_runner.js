@@ -10,11 +10,9 @@ let roleRemoteRunner = {
     run: function(creep) {
         if (creep.memory.working && creep.carry.energy == 0) {
             creep.memory.working = false;
-            creep.say('🔄 gather');
         }
         if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
             creep.memory.working = true;
-            creep.say('🚧 place');
         }
 
         if (creep.memory.working) {
