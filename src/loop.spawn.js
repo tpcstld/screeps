@@ -2,12 +2,12 @@ const loopSpawn = {
 
     NUM_TYPES: [
         {type: 'refill', num: (spawn) => 1},
-        {type: 'invader', num: (spawn) => _.max(_.map(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0)) / 5},
+        {type: 'invader', refundable: true, num: (spawn) => _.max(_.map(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0)) / 5},
         {type: 'attack', num: (spawn) => 0},
         {type: 'heal', num: (spawn) => 0},
         {type: 'mine', num: (spawn) => 2},
         {type: 'build', num: (spawn) => 2},
-        {type: 'upgrade', num: (spawn) => Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].storedEnergy / 1500), 1)},
+        {type: 'upgrade', num: (spawn) => Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].storedEnergy / 2000), 1)},
         {type: 'run', num: (spawn) => Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].droppedEnergy / 2000), 1)},
         {type: 'repair', num: (spawn) => 2},
         {type: 'remoteMine', num: (spawn) => 1},
@@ -79,8 +79,10 @@ const loopSpawn = {
         let creepsByRole = _.groupBy(Game.creeps, c => c.memory.role);
         for (let role in creepsByRole) {
             const creeps = creepsByRole[role];
+            const type = this.getRoleType(role);
+
             const count = creeps.length;
-            const difference = count - _.filter(this.NUM_TYPES, t => t.type == role)[0].num(spawn);
+            const difference = count - type.num(spawn);
 
             for (let xx = 0; xx < count; xx++) {
                 creeps[xx].memory.refund = false;
@@ -89,6 +91,14 @@ const loopSpawn = {
                 }
             }
         }
-    }
+    },
+
+    getRoleType(name) {
+      const maybeType = _.filter(this.NUM_TYPES, t => t.type == name);
+      if (maybeType.length > 0) {
+        return maybeType[0];
+      }
+      return null;
+    },
 }
 module.exports = loopSpawn;
