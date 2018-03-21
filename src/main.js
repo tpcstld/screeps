@@ -18,6 +18,7 @@ const ROLES = {
     'invaderHeal': require('role.invader_healer'),
     'tower': require('role.tower'),
     'link': require('role.link'),
+    'link_refiller': require('role.link_refiller'),
 };
 
 var Traveler = require('Traveler');
