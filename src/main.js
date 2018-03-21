@@ -1,5 +1,5 @@
 const PROTOTYPES = [
-  require('prototype.movement'),
+  require('prototype.creep'),
 ];
 
 const ROLES = {
