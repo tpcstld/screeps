@@ -59,12 +59,16 @@ const loopSpawn = {
 
         let nextCreepType = this.getNextCreepType(spawn);
         if (nextCreepType) {
-            spawn.spawnCreep(this.KITS[nextCreepType], "Bot" + Game.time, {
-                memory: {
-                    role: nextCreepType
-                }
-            });
+            this.spawnCreep(spawn, nextCreepType);
         }
+    },
+
+    spawnCreep: function(spawn, type) {
+      return spawn.spawnCreep(this.KITS[type], "Bot" + Game.time, {
+          memory: {
+            role: type
+          }
+      });
     },
 
     getNextCreepType: function(spawn) {
