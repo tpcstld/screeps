@@ -7,7 +7,9 @@ const roleLink = {
     }
 
     const targets = link.room.find(FIND_STRUCTURES, {
-        filter: s => s.structureType == STRUCTURE_LINK && s.energy < s.energyCapacity / 2
+        filter: s => s.structureType == STRUCTURE_LINK
+          && s.id != link.id
+          && s.energy < s.energyCapacity / 2
     });
 
     if (targets.length > 0) {
