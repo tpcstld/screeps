@@ -1,9 +1,5 @@
 const loopSpawn = {
 
-    TYPE_COUNT: {
-      'mine': { num: (spawn) => 2 },
-    },
-
     NUM_TYPES: [
         {type: 'refill', num: (spawn) => 1},
         {type: 'link_refiller', num: (spawn) => 1},
@@ -24,7 +20,7 @@ const loopSpawn = {
             if (storage.length > 0) {
               energy = energy + roomStats.containerEnergy;
             }
-            return Math.max(Math.ceil(energy / 2000), loopSpawn.TYPE_COUNT["mine"].num(spawn));
+            return Math.max(Math.ceil(energy / 2000), loopSpawn.getRoleType("mine").num(spawn));
           }
         },
         {type: 'repair', num: (spawn) => 2},
