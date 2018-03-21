@@ -8,10 +8,18 @@ let utilsHarvest = {
     },
 
     getEnergyFromContainers: function(creep, force) {
-        // Get energy from containers.
-        var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-            filter: c => c.structureType === STRUCTURE_CONTAINER && c.store[RESOURCE_ENERGY] > 0 && (force || c.store[RESOURCE_ENERGY] >= creep.carryCapacity * (utilsLoad.getTargetCount(creep, c, "take") + 1))
+        let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+            filter: c => c.structureType === STRUCTURE_STORAGE
+              && c.store[RESOURCE_ENERGY] > 0
+              && (force || c.store[RESOURCE_ENERGY] >= creep.carryCapacity * (utilsLoad.getTargetCount(creep, c, "take") + 1))
         });
+        if (!target) {
+          target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+              filter: c => c.structureType === STRUCTURE_CONTAINER
+                && c.store[RESOURCE_ENERGY] > 0
+                && (force || c.store[RESOURCE_ENERGY] >= creep.carryCapacity * (utilsLoad.getTargetCount(creep, c, "take") + 1))
+          });
+        }
 
         if (target) {
             utilsLoad.claimTarget(creep, target, "take");
