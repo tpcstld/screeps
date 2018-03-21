@@ -8,7 +8,7 @@ var roleUpgrader = {
 
         if (state == 'gather') {
             const nearbyLinks = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-                s => s.structureType == STRUCTURE_LINK
+                filter: s => s.structureType == STRUCTURE_LINK
             });
             if (nearbyLinks.length > 0) {
                 creep.withdraw(nearbyLinks[0], RESOURCE_ENERGY);
