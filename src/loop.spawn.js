@@ -12,7 +12,7 @@ const loopSpawn = {
             const storage = spawn.room.find(FIND_STRUCTURES, {
                 filter: s => s.structureType === STRUCTURE_STORAGE
             });
-            let roomStats = Memory.stats[spawn.room.name];
+            let roomStats = Memory.stats.rooms[spawn.room.name];
 
             let energy = roomStats.droppedEnergy;
             if (storage.length > 0) {
