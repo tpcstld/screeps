@@ -127,7 +127,7 @@ let utilsEnergy = {
         }
         if (target) {
             for (const resourceType in creep.carry) {
-              if (creep.transfer(storage, resourceType) == ERR_NOT_IN_RANGE) {
+              if (creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE) {
                 creep.travelTo(target);
               }
             }
