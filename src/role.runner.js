@@ -36,7 +36,7 @@ const roleRunner = {
             }
             if (target) {
               // TODO: Withdraw every resource.
-                if (creep.pickup(target) == ERR_NOT_IN_RANGE) || creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if (creep.pickup(target) == ERR_NOT_IN_RANGE || creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.travelTo(target);
                 }
                 utilsLoad.claimTarget(creep, target, "take");
