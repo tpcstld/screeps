@@ -40,6 +40,7 @@ module.exports.loop = function () {
     }
 
     const needs = EconomyAdvisor.getNeeds();
+    console.log(needs);
 
     for (let name in processors) {
       const processor = processors[name];
