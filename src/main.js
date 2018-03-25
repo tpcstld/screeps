@@ -28,6 +28,10 @@ const loopStats = require('loop.stats');
 
 const EconomyAdvisor = require('advisor.economy');
 
+const processors = [
+  require('processor.spawn')
+];
+
 module.exports.loop = function () {
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
@@ -36,7 +40,11 @@ module.exports.loop = function () {
     }
 
     const needs = EconomyAdvisor.getNeeds();
-    console.log(needs);
+
+    for (let name in processors) {
+      const processor = processors[name];
+      processor.solveNeeds(processor.filterNeeds(needs))
+    }
 
     for (let name in Game.spawns) {
         let spawn = Game.spawns[name];
