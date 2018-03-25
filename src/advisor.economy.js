@@ -23,7 +23,7 @@ const EconomyAdvisor = {
       needs.push({
           type: "spawn",
           role: "refill",
-          roomId: room.id,
+          room: room.name,
       });
     }
 
@@ -35,7 +35,7 @@ const EconomyAdvisor = {
       needs.push({
           type: "spawn",
           role: "mine",
-          roomId: room.id,
+          room: room.name,
       });
     }
 
