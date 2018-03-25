@@ -10,7 +10,7 @@ const EconomyAdvisor = {
     }
 
     return needs;
-  }
+  },
 
   getNeedsForRoom: function(room) {
     const needs = [];
