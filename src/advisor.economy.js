@@ -20,7 +20,7 @@ const EconomyAdvisor = {
   },
 
   getNeedsForSpawnRoom: function(room) {
-    const needs = [];
+    let needs = [];
 
     const roomCreeps = room.find(FIND_MY_CREEPS);
 
@@ -46,8 +46,31 @@ const EconomyAdvisor = {
       });
     }
 
+    const numRunners = this.getNumRunners(room);
+    for (let i = 0; i < numRunners; i++) {
+      needs.push({
+          type: "spawn",
+          role: "run",
+          room: room.name,
+      });
+    }
+
     return needs;
-  }
+  },
+
+  getNumRunners: function(room) {
+    // Deploy runners depending on load.
+    const storage = room.find(FIND_STRUCTURES, {
+        filter: s => s.structureType === STRUCTURE_STORAGE
+    });
+    let roomStats = Memory.stats.rooms[room.name];
+
+    let energy = roomStats.droppedEnergy;
+    if (storage.length > 0) {
+      energy = energy + roomStats.containerEnergy;
+    }
+    return Math.ceil((energy + 1500) / 2000)
+  },
 }
 
 module.exports = EconomyAdvisor;
