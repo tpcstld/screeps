@@ -79,6 +79,7 @@ const EconomyAdvisor = {
     return [];
   },
 
+  // TODO: Move to some utils.
   fillSpawnNeedForRoom: function(room, num, role) {
     const needs = [];
     const current = _.filter(Game.creeps, c => c.memory.role == role

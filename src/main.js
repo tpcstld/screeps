@@ -19,6 +19,7 @@ const ROLES = {
     'tower': require('role.tower'),
     'link': require('role.link'),
     'link_refiller': require('role.link_refiller'),
+    'colonize': require('role.colonizer'),
 };
 
 var Traveler = require('Traveler');
