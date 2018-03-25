@@ -2,7 +2,6 @@ const utilsEnergy = require('utils.energy');
 const utilsHarvest = require('utils.harvest');
 
 const FLAG_EXTERNAL_MINE = "ExtMine";
-const FLAG_HOME = "Home";
 
 let roleRemoteMiner = {
 

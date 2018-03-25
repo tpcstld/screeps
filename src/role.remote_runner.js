@@ -2,7 +2,6 @@ const utilsEnergy = require('utils.energy');
 const utilsHarvest = require('utils.harvest');
 
 const FLAG_EXTERNAL_MINE = "ExtMine";
-const FLAG_HOME = "Home";
 
 let roleRemoteRunner = {
 
@@ -16,21 +15,18 @@ let roleRemoteRunner = {
         }
 
         if (creep.memory.working) {
-            let flag = Game.flags[FLAG_HOME];
-            if (flag.room === undefined || flag.room.name !== creep.room.name) {
-                creep.travelTo(flag.pos);
-            } else {
-                const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
-                    filter: s => s.structureType === STRUCTURE_CONTAINER
-                        && _.sum(s.store) < s.storeCapacity
-                        && s.room.name == flag.room.name
-                });
-                if (container) {
-                    if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.travelTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
-                    }
-                }
-            }
+          if (!creep.goHomeRoom()) {
+              const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
+                  filter: s => s.structureType === STRUCTURE_CONTAINER
+                      && _.sum(s.store) < s.storeCapacity
+                      && s.room.name == flag.room.name
+              });
+              if (container) {
+                  if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                      creep.travelTo(container, {visualizePathStyle: {stroke: '#ffaa00'}});
+                  }
+              }
+          }
         } else {
             let flag = Game.flags[FLAG_EXTERNAL_MINE];
             if (flag.room === undefined || flag.room.name !== creep.room.name) {
@@ -90,10 +86,7 @@ let roleRemoteRunner = {
         }
 
         if (creep.memory.state === "goBack") {
-            let flag = Game.flags[FLAG_HOME];
-            if (flag.room === undefined || flag.room.name !== creep.room.name) {
-                creep.travelTo(flag.pos, {visualizePathStyle: {stroke: '#ffaa00'}});
-            } else {
+            if (!creep.goHomeRoom()) {
                 const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: s => s.structureType === STRUCTURE_CONTAINER
                         && _.sum(s.store) < s.storeCapacity
