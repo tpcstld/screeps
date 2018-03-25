@@ -23,10 +23,9 @@ var roleUpgrader = {
         if (state == 'upgrade') {
           const home = Game.getObjectById(creep.memory.home);
           const controller = home.room.controller;
-          creep.upgradeController(controller);
-          creep.travelTo(controller, {
-              stuckValue: 8
-          });
+          if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
+            creep.travelTo(controller);
+          }
 
           if (creep.carry.energy == 0) {
               state = 'gather';
