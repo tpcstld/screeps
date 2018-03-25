@@ -63,10 +63,27 @@ const EconomyAdvisor = {
       energy = energy + roomStats.containerEnergy;
     }
     const numRunners = Math.ceil((energy + 1500) / 2000);
-    const currentRunners = _.filter(roomCreeps, c => c.memory.role == "run");
-    const numDifference = numRunners - currentRunners.length;
 
-    const needs = []
+    return this.fillSpawnNeedForRoom(room, numRunners, "run");
+  },
+
+  requestLinkRefillersForRoom: function(room, roomCreeps) {
+    const links = room.find(FIND_STRUCTURES, {
+        filter: s => s.structureType == STRUCTURE_LINK
+    });
+
+    if (links.length >= 2) {
+      return this.fillSpawnNeedForRoom(room, 1, "link_refiller");
+    }
+    return [];
+  },
+
+  fillSpawnNeedForRoom: function(room, num, role) {
+    const needs = [];
+    const current = _.filter(Game.creeps, c => c.memory.role == role
+      && c.memory.homeRoom == room.name);
+
+    const numDifference = num - current.length;
     for (let i = 0; i < numDifference; i++) {
       needs.push({
           type: "spawn",
@@ -75,10 +92,7 @@ const EconomyAdvisor = {
       });
     }
     return needs;
-  },
-
-  requestLinkRunnersForRoom: function(room, roomCreeps) {
-  },
+  }
 }
 
 module.exports = EconomyAdvisor;
