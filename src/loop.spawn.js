@@ -9,7 +9,6 @@ const loopSpawn = {
         {type: 'mine', num: (spawn) => 2},
         {type: 'upgrade', num: (spawn) => 2},
         {type: 'build', refundable: true, num: (spawn) => Math.min(2, Memory.stats.rooms[spawn.room.name].numConstructionSites)},
-        // Math.min(Math.max(Math.ceil(Memory.stats.rooms[spawn.room.name].storageEnergy / 2000), 1), 3)},
         {type: 'run', num: (spawn) => {
             const storage = spawn.room.find(FIND_STRUCTURES, {
                 filter: s => s.structureType === STRUCTURE_STORAGE
@@ -73,7 +72,8 @@ const loopSpawn = {
     },
 
     getNextCreepType: function(spawn) {
-        let creepsCount = _.countBy(Game.creeps, c => c.memory.role);
+        let creeps = _.filter(Game.creeps, c => c.memory.home == spawn.id);
+        let creepsCount = _.countBy(creeps, c => c.memory.role);
 
         // Avoid dead base.
         if (Object.keys(creepsCount).length <= 1) {
@@ -96,7 +96,8 @@ const loopSpawn = {
     },
 
     markRefund: function(spawn) {
-        let creepsByRole = _.groupBy(Game.creeps, c => c.memory.role);
+        let spawnCreeps = _.filter(Game.creeps, c => c.memory.home == spawn.id);
+        let creepsByRole = _.groupBy(spawnCreeps, c => c.memory.role);
         for (let role in creepsByRole) {
             const creeps = creepsByRole[role];
             const type = this.getRoleType(role);

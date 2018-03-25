@@ -21,9 +21,11 @@ let roleRefiller = {
                 creep.idle();
             }
         } else {
-            if (!utilsHarvest.getEnergyFromContainers(creep, true)) {
-                creep.idle();
+            if (utilsHarvest.getEnergyFromContainers(creep, true)) {
+                return;
             }
+
+            creep.idle();
         }
     }
 };
