@@ -11,7 +11,7 @@ const CommandAdvisor = {
     const needs = []
     const flag = Game.flags["Colony"];
     if (!flag) {
-      return;
+      return needs;
     }
 
     const colonizers = _.filter(Game.creeps, c => c.memory.role == "colonize");
