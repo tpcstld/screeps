@@ -44,19 +44,19 @@ let utilsHarvest = {
 
     // Harvest a random energy cell.
     harvestRandom: function(creep, maxConcurrent) {
-        var target = creep.pos.findClosestByPath(FIND_SOURCES, {
+        const target = creep.pos.findClosestByPath(FIND_SOURCES, {
             filter: s => utilsLoad.getTargetCount(creep, s, "mine") < maxConcurrent
         });
 
         if (target) {
             if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
-                creep.travelTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.travelTo(target);
             }
             utilsLoad.claimTarget(creep, target, "mine");
-            return true;
+            return target;
         } else {
             utilsLoad.clearTarget(creep);
-            return false;
+            return null;
         }
     }
 };
