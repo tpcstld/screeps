@@ -5,6 +5,9 @@ let roleMiner = {
     /** @param {Creep} creep **/
     run: function(creep) {
         const source = utilsHarvest.harvestRandom(creep, 1);
+        if (!source) {
+          return;
+        }
 
         const containers = source.pos.findInRange(FIND_STRUCTURES, 1, {
             filter: s => s.structureType === STRUCTURE_CONTAINER
