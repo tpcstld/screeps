@@ -12,6 +12,7 @@ function resolveTemplate(parts, energy) {
 const kits = {
   'refill': (energy) => [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
   'mine': (energy) => resolveTemplate([WORK], Math.min(energy, 500)).concat([MOVE]),
+  'run': (energy) => resolveTemplate([CARRY, CARRY, MOVE], Math.min(energy, 600)),
 };
 
 module.exports = kits;
