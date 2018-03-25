@@ -1,5 +1,5 @@
 
-const EconomyAdvisor {
+const EconomyAdvisor = {
 
   getNeeds: function() {
     let needs = [];
