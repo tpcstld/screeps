@@ -17,7 +17,8 @@ const loopSpawn = {
             if (storage.length > 0) {
               energy = energy + roomStats.containerEnergy;
             }
-            return Math.max(Math.ceil(energy / 2000), loopSpawn.getRoleType("mine").num(spawn));
+            return Math.max(Math.ceil(energy / 2000), 2);
+            // loopSpawn.getRoleType("mine").num(spawn));
           }
         },
         {type: 'repair', num: (spawn) => 2},
