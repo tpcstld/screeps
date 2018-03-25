@@ -1,7 +1,10 @@
 const utilsLoad = require('utils.load');
 
 Creep.prototype.idle = function() {
-  this.travelTo(Game.flags["Idle"].pos, {
+  const spawn = this.pos.findClosestByPath(FIND_STRUCTURES, {
+        filter: s => s.structureType == STRUCTURE_SPAWN
+  });
+  this.travelTo(spawn, {
       stuckValue: 8
   });
 };

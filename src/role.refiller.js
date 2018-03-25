@@ -21,11 +21,21 @@ let roleRefiller = {
                 creep.idle();
             }
         } else {
-            if (utilsHarvest.getEnergyFromContainers(creep, true)) {
-                return;
-            }
+          if (utilsHarvest.getEnergyFromContainers(creep, true)) {
+              return;
+          }
 
-            creep.idle();
+          let target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
+              filter: r => r.amount >= 40
+          });
+          if (target) {
+            if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
+                creep.travelTo(target);
+            }
+            return;
+          }
+
+          creep.idle();
         }
     }
 };
