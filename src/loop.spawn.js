@@ -9,7 +9,6 @@ const loopSpawn = {
         {type: 'repair', num: (spawn) => 2},
         {type: 'remoteMine', num: (spawn) => 1},
         {type: 'remoteRunner', num: (spawn) => 2},
-        {type: 'general', num: (spawn) => 0},
     ],
 
     KITS: {
@@ -59,13 +58,6 @@ const loopSpawn = {
     getNextCreepType: function(spawn) {
         let creeps = _.filter(Game.creeps, c => c.memory.home == spawn.id);
         let creepsCount = _.countBy(creeps, c => c.memory.role);
-
-        // Avoid dead base.
-        if (Object.keys(creepsCount).length <= 1) {
-            if (!creepsCount["general"] || creepsCount["general"] < 3) {
-                return "general";
-            }
-        }
 
         for (let index in this.NUM_TYPES) {
             const creepType = this.NUM_TYPES[index];
