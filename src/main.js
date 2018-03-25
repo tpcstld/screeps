@@ -47,10 +47,7 @@ module.exports.loop = function () {
       processor.solveNeeds(processor.filterNeeds(needs))
     }
 
-    for (let name in Game.spawns) {
-        let spawn = Game.spawns[name];
-        loopSpawn.run(spawn);
-    }
+    loopSpawn.run(Game.spawns["Spawn1"])
 
     for (let name in Game.creeps) {
         let creep = Game.creeps[name];
