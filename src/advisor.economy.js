@@ -89,7 +89,7 @@ const EconomyAdvisor = {
     for (let i = 0; i < numDifference; i++) {
       needs.push({
           type: "spawn",
-          role: "run",
+          role: role,
           room: room.name,
       });
     }
