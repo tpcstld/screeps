@@ -50,7 +50,7 @@ module.exports.loop = function () {
       needs = needs.concat(advisor.getNeeds());
     }
 
-    if (needs) {
+    if (needs.length > 0) {
       console.log(JSON.stringify(needs));
     }
 
