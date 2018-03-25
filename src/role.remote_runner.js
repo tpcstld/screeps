@@ -19,7 +19,7 @@ let roleRemoteRunner = {
               const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                   filter: s => s.structureType === STRUCTURE_CONTAINER
                       && _.sum(s.store) < s.storeCapacity
-                      && s.room.name == flag.room.name
+                      && s.room.name == creep.memory.homeRoom
               });
               if (container) {
                   if (creep.transfer(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -50,7 +50,7 @@ let roleRemoteRunner = {
         if (creep.memory.state === "toRemoteContainer") {
             let flag = Game.flags[FLAG_EXTERNAL_MINE];
             if (flag.room === undefined || flag.room.name !== creep.room.name) {
-                creep.travelTo(flag.pos, {visualizePathStyle: {stroke: '#ffaa00'}});
+              creep.travelTo(flag.pos);
             } else {
                 const container = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                     filter: s => s.structureType === STRUCTURE_CONTAINER
