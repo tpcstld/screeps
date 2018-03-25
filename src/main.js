@@ -26,12 +26,17 @@ var Traveler = require('Traveler');
 const loopSpawn = require('loop.spawn');
 const loopStats = require('loop.stats');
 
+const EconomyAdvisor = require('advisor.economy');
+
 module.exports.loop = function () {
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             delete Memory.creeps[i];
         }
     }
+
+    const needs = EconomyAdvisor.getNeeds();
+    console.log(needs);
 
     for (let name in Game.spawns) {
         let spawn = Game.spawns[name];
