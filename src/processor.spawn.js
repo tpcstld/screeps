@@ -29,7 +29,6 @@ const SpawnProcessor = {
         memory: {
           role: role,
           homeRoom: spawn.room.name,
-          home: spawn.id,
         }
     });
   },
