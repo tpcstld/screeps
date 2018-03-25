@@ -20,10 +20,16 @@ let utilsHarvest = {
                 && (force || c.store[RESOURCE_ENERGY] >= creep.carryCapacity * (utilsLoad.getTargetCount(creep, c, "take") + 1))
           });
         }
+        if (!target) {
+          target = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
+              filter: r => r.resourceType == RESOURCE_ENERGY
+                && (force || r.amount >= creep.carryCapacity * (utilsLoad.getTargetCount(creep, r, "take") + 1))
+          });
+        }
 
         if (target) {
             utilsLoad.claimTarget(creep, target, "take");
-            if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            if (creep.pickup(target) == ERR_NOT_IN_RANGE || creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.travelTo(target);
             }
             return true;
