@@ -66,7 +66,8 @@ const loopSpawn = {
     spawnCreep: function(spawn, type) {
       return spawn.spawnCreep(this.KITS[type], "Bot" + Game.time, {
           memory: {
-            role: type
+            role: type,
+            home: spawn.id,
           }
       });
     },
