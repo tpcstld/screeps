@@ -20,7 +20,7 @@ const SpawnProcessor = {
   },
 
   spawnCreep: function(spawn, role) {
-    const spawnStructures = room.find(FIND_STRUCTURES, {
+    const spawnStructures = spawn.room.find(FIND_STRUCTURES, {
         filter: s => s.structureType === STRUCTURE_EXTENSION || s.structureType === STRUCTURE_SPAWN
     });
     const capacity = _.sum(spawnStructures, s => s.energyCapacity);
