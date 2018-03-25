@@ -13,6 +13,13 @@ const EconomyAdvisor = {
   },
 
   getNeedsForRoom: function(room) {
+    if (room.controller.my) {
+      return getNeedsForSpawnRoom(room);
+    }
+    return [];
+  },
+
+  getNeedsForSpawnRoom: function(room) {
     const needs = [];
 
     const roomCreeps = room.find(FIND_MY_CREEPS);
