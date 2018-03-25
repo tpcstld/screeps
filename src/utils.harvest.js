@@ -36,11 +36,8 @@ let utilsHarvest = {
         }
 
         utilsLoad.clearTarget(creep);
-
-        let flag = Game.flags["Home"];
-        if (flag.room === undefined || flag.room.name !== creep.room.name) {
-            creep.travelTo(flag.pos);
-            return true;
+        if (creep.goHomeRoom()) {
+          return true;
         }
         return false;
     },

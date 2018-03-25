@@ -10,9 +10,29 @@ Creep.prototype.idle = function() {
 };
 
 Creep.prototype.refund = function() {
-  const spawn = Game.spawns["Spawn1"];
+  const spawn = this.getHomeSpawn();
   this.travelTo(spawn);
 };
+
+Creep.prototype.goHomeRoom = function() {
+  // Assume always exists.
+  const homeRoom = Game.rooms[this.memory.homeRoom];
+
+  if (homeRoom.name != this.room.name) {
+    const home = this.getHomeSpawn();
+    this.travelTo(home);
+    return true;
+  }
+  return false;
+}
+
+Creep.prototype.getHomeSpawn = function() {
+  const homeRoom = Game.rooms[this.memory.homeRoom];
+
+  return homeRoom.find(FIND_STRUCTURES, {
+      filter: s => s.structureType == STRUCTURE_SPAWN
+  })[0];
+}
 
 Creep.prototype.takeResource = function(resource, force) {
   // From storage.
