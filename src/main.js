@@ -50,7 +50,9 @@ module.exports.loop = function () {
       needs = needs.concat(advisor.getNeeds());
     }
 
-    console.log(JSON.stringify(needs));
+    if (needs) {
+      console.log(JSON.stringify(needs));
+    }
 
     for (let name in processors) {
       const processor = processors[name];
