@@ -46,13 +46,14 @@ const EconomyAdvisor = {
       });
     }
 
-    needs = needs.concat(this.requestRunnersForRoom(room, roomCreeps));
+    needs = needs.concat(this.requestRunnersForRoom(room));
+    needs = needs.concat(this.requestLinkRefillersForRoom(room));
 
     return needs;
   },
 
   // Deploy runners depending on load.
-  requestRunnersForRoom: function(room, roomCreeps) {
+  requestRunnersForRoom: function(room) {
     const storage = room.find(FIND_STRUCTURES, {
         filter: s => s.structureType === STRUCTURE_STORAGE
     });
@@ -67,7 +68,7 @@ const EconomyAdvisor = {
     return this.fillSpawnNeedForRoom(room, numRunners, "run");
   },
 
-  requestLinkRefillersForRoom: function(room, roomCreeps) {
+  requestLinkRefillersForRoom: function(room) {
     const links = room.find(FIND_STRUCTURES, {
         filter: s => s.structureType == STRUCTURE_LINK
     });
