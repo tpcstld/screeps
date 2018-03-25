@@ -14,7 +14,7 @@ const EconomyAdvisor = {
 
   getNeedsForRoom: function(room) {
     if (room.controller.my) {
-      return getNeedsForSpawnRoom(room);
+      return this.getNeedsForSpawnRoom(room);
     }
     return [];
   },
