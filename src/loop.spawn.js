@@ -7,19 +7,6 @@ const loopSpawn = {
         {type: 'heal', num: (spawn) => 0},
         {type: 'upgrade', num: (spawn) => 2},
         {type: 'build', refundable: true, num: (spawn) => Math.min(2, Memory.stats.rooms[spawn.room.name].numConstructionSites)},
-        {type: 'run', num: (spawn) => {
-            const storage = spawn.room.find(FIND_STRUCTURES, {
-                filter: s => s.structureType === STRUCTURE_STORAGE
-            });
-            let roomStats = Memory.stats.rooms[spawn.room.name];
-
-            let energy = roomStats.droppedEnergy;
-            if (storage.length > 0) {
-              energy = energy + roomStats.containerEnergy;
-            }
-            return Math.max(Math.ceil(energy / 2000), 2);
-          }
-        },
         {type: 'repair', num: (spawn) => 2},
         {type: 'remoteMine', num: (spawn) => 1},
         {type: 'remoteRunner', num: (spawn) => 2},
