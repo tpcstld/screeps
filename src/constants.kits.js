@@ -14,6 +14,7 @@ const kits = {
   'mine': (energy) => resolveTemplate([WORK], Math.min(energy, 500)).concat([MOVE]),
   'run': (energy) => resolveTemplate([CARRY, CARRY, MOVE], Math.min(energy, 600)),
   'link_refiller': (energy) => [CARRY, MOVE],
+  'colonize': (energy) => [CLAIM, MOVE],
 };
 
 module.exports = kits;
