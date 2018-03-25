@@ -26,6 +26,11 @@ var Traveler = require('Traveler');
 const loopSpawn = require('loop.spawn');
 const loopStats = require('loop.stats');
 
+const advisors = [
+  require('advisor.command'),
+  require('advisor.economy'),
+];
+
 const EconomyAdvisor = require('advisor.economy');
 
 const processors = [
@@ -39,7 +44,12 @@ module.exports.loop = function () {
         }
     }
 
-    const needs = EconomyAdvisor.getNeeds();
+    let needs = [];
+    for (let name in advisors) {
+      const advisor = advisors[name];
+      needs = needs.concat(advisor.getNeeds());
+    }
+
     console.log(JSON.stringify(needs));
 
     for (let name in processors) {
