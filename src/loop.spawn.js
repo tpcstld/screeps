@@ -101,7 +101,7 @@ const loopSpawn = {
             const creeps = creepsByRole[role];
             const type = this.getRoleType(role);
 
-            if (!type.refundable) {
+            if (!type || !type.refundable) {
               continue;
             }
 
