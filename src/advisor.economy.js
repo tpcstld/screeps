@@ -24,6 +24,14 @@ const EconomyAdvisor = {
 
     const roomCreeps = room.find(FIND_MY_CREEPS);
 
+    if (roomCreeps.length < 3) {
+      needs.push({
+          type: "spawn",
+          role: "general",
+          room: room.name,
+      });
+    }
+
     // Every room needs one refiller.
     const refillers = _.filter(roomCreeps, c => c.memory.role == "refill");
     if (refillers.length < 1) {

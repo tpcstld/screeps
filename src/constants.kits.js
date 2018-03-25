@@ -15,6 +15,7 @@ const kits = {
   'run': (energy) => resolveTemplate([CARRY, CARRY, MOVE], Math.min(energy, 600)),
   'link_refiller': (energy) => [CARRY, MOVE],
   'colonize': (energy) => [CLAIM, MOVE],
+  'general': (energy) => [WORK, CARRY, MOVE],
 };
 
 module.exports = kits;
