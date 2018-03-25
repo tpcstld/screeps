@@ -21,14 +21,16 @@ var roleUpgrader = {
             }
         }
         if (state == 'upgrade') {
-            creep.upgradeController(creep.room.controller);
-            creep.travelTo(creep.room.controller, {
-                stuckValue: 8
-            });
+          const home = Game.getObjectById(creep.memory.home);
+          const controller = home.room.controller;
+          creep.upgradeController(controller);
+          creep.travelTo(controller, {
+              stuckValue: 8
+          });
 
-            if (creep.carry.energy == 0) {
-                state = 'gather';
-            }
+          if (creep.carry.energy == 0) {
+              state = 'gather';
+          }
         }
         creep.memory.state = state;
     }
