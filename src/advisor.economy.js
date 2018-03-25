@@ -1,7 +1,7 @@
 
-class EconomyAdvisor {
+const EconomyAdvisor {
 
-  getNeeds() {
+  getNeeds: function() {
     let needs = [];
     for (let name in Game.rooms) {
       const room = Game.rooms[name];
@@ -12,7 +12,7 @@ class EconomyAdvisor {
     return needs;
   }
 
-  getNeedsForRoom(room) {
+  getNeedsForRoom: function(room) {
     const needs = [];
 
     const roomCreeps = room.find(FIND_MY_CREEPS);
