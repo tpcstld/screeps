@@ -18,7 +18,7 @@ const EconomyAdvisor = {
     const roomCreeps = room.find(FIND_MY_CREEPS);
 
     // Every room needs one refiller.
-    const refillers = _.filter(roomCreeps, c => c.role == "refill");
+    const refillers = _.filter(roomCreeps, c => c.memory.role == "refill");
     if (refillers.length < 0) {
       needs.push({
           type: "spawn",
@@ -29,7 +29,7 @@ const EconomyAdvisor = {
 
     // Every room should have as many miners as sources.
     const sources = room.find(FIND_SOURCES);
-    const miners = _.filter(roomCreeps, c => c.role == "mine");
+    const miners = _.filter(roomCreeps, c => c.memory.role == "mine");
     const numDifference = sources.length - miners.length;
     for (let i = 0; i < numDifference; i++) {
       needs.push({
