@@ -1,6 +1,6 @@
 function resolveTemplate(parts, energy) {
   const templateCost = _.sum(parts, p => BODYPART_COST[p]);
-  const times = Math.floor(energy, templateCost);
+  const times = Math.floor(energy / templateCost);
 
   let body = [];
   for (let i = 0; i < times; i++) {

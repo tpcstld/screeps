@@ -25,6 +25,8 @@ const SpawnProcessor = {
     });
     const capacity = _.sum(spawnStructures, s => s.energyCapacity);
 
+    console.log(KITS[role](capacity))
+
     return spawn.spawnCreep(KITS[role](capacity), "Bot" + Game.time, {
         memory: {
           role: role,
