@@ -30,9 +30,8 @@ const loopStats = require('loop.stats');
 const advisors = [
   require('advisor.command'),
   require('advisor.economy'),
+  require('advisor.build'),
 ];
-
-const EconomyAdvisor = require('advisor.economy');
 
 const processors = [
   require('processor.spawn')
