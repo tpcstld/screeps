@@ -12,7 +12,7 @@ const BuildAdvisor = {
     return needs;
   },
 
-  getNeedsForConstructionSites() {
+  getNeedsForConstructionSites: function() {
     const needs = [];
     for (let name in Game.constructionSites) {
       const site = Game.constructionSites[name];
@@ -25,7 +25,7 @@ const BuildAdvisor = {
     return needs;
   },
 
-  getNeedsForRepair() {
+  getNeedsForRepair: function() {
     const needs = [];
 
     // TODO: Exclude rooms.
