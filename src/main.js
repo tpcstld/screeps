@@ -38,6 +38,8 @@ const processors = [
   require('processor.spawn')
 ];
 
+const NeedContainer = require('NeedContainer');
+
 module.exports.loop = function () {
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
@@ -45,16 +47,17 @@ module.exports.loop = function () {
         }
     }
 
-    let needs = [];
+    const container = new NeedContainer();
     for (let name in advisors) {
       const advisor = advisors[name];
-      needs = needs.concat(advisor.getNeeds());
+      container.addNeeds(advisor.getNeeds());
     }
+
+    const needs = container.getNeeds();
 
     if (needs.length > 0) {
       console.log(JSON.stringify(needs));
     }
-
     for (let name in processors) {
       const processor = processors[name];
       processor.solveNeeds(processor.filterNeeds(needs))
