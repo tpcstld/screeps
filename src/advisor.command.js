@@ -14,19 +14,26 @@ const CommandAdvisor = {
       return needs;
     }
 
-    const colonizers = _.filter(Game.creeps, c => c.memory.role == "colonize");
-    if (colonizers.length < 0) {
-      // TODO: Closest room should spawn the colonizer.
-      const room = Game.spawns["Spawn1"].room;
-
-      needs.push({
-          type: "spawn",
-          role: "colonize",
-          room: room.name,
-      });
-    }
+    needs.push({
+        type: "colonize",
+        pos: flag.pos,
+    });
 
     return needs;
+
+    // const colonizers = _.filter(Game.creeps, c => c.memory.role == "colonize");
+    // if (colonizers.length < 0) {
+    //   // TODO: Closest room should spawn the colonizer.
+    //   const room = Game.spawns["Spawn1"].room;
+
+    //   needs.push({
+    //       type: "spawn",
+    //       role: "colonize",
+    //       room: room.name,
+    //   });
+    // }
+
+    // return needs;
   }
 };
 
