@@ -44,6 +44,14 @@ const EconomyAdvisor = {
 
     // Every room should have as many miners as sources.
     const sources = room.find(FIND_SOURCES);
+    for (let i in sources) {
+      const source = sources[i];
+      needs.push({
+          type: 'mine',
+          target: source,
+      });
+    }
+
     const miners = _.filter(roomCreeps, c => c.memory.role == "mine");
     const numDifference = sources.length - miners.length;
     for (let i = 0; i < numDifference; i++) {

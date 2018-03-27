@@ -2,23 +2,34 @@ let utilsHarvest = require('utils.harvest');
 
 let roleMiner = {
 
-    /** @param {Creep} creep **/
-    run: function(creep) {
-        const source = utilsHarvest.harvestRandom(creep, 1);
-        if (!source) {
-          return;
-        }
-
-        const containers = source.pos.findInRange(FIND_STRUCTURES, 1, {
-            filter: s => s.structureType === STRUCTURE_CONTAINER
-        });
-        if (containers.length > 0) {
-          const container = containers[0];
-          if (!creep.pos.isEqualTo(container.pos)) {
-            creep.travelTo(container);
-          }
-        }
+  getNeed: function(needs) {
+    needs = _.filter(needs, n => n.type == "mine");
+    if (needs.length > 0) {
+      return needs[0];
     }
+    return null;
+  },
+
+  /** @param {Creep} creep **/
+  run: function(creep, need) {
+    const target = need.target;
+    if (!target) {
+      return;
+    }
+
+    const travelTarget = target;
+    const containers = target.pos.findInRange(FIND_STRUCTURES, 1, {
+        filter: s => s.structureType === STRUCTURE_CONTAINER
+    });
+    if (containers.length > 0) {
+      travelTarget = containers[0];
+    }
+
+    if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
+      creep.travelTo(travelTarget);
+    }
+
+  }
 };
 
 module.exports = roleMiner;
