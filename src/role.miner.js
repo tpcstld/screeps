@@ -2,16 +2,19 @@ let utilsHarvest = require('utils.harvest');
 
 let roleMiner = {
 
-  getNeed: function(needs) {
-    needs = _.filter(needs, n => n.type == "mine");
-    if (needs.length > 0) {
-      return needs[0];
+  getNeed: function(creep, needs) {
+    const target = creep.memory.target;
+    needs = _.filter(needs, n => n.type == "mine" && n.target == target);
+
+    if (needs.length == 0) {
+      return null;
     }
-    return null;
+
+    return needs[0];
   },
 
   run: function(creep, need) {
-    const target = need.target;
+    const target = creep.memory.target;
     if (!target) {
       return;
     }

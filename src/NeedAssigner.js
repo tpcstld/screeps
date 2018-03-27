@@ -14,7 +14,7 @@ const NeedAssigner = {
       }
 
       const needs = container.getNeeds();
-      const chosenNeed = role.getNeed(needs);
+      const chosenNeed = role.getNeed(creep, needs);
       if (!chosenNeed)  {
         continue;
       }
