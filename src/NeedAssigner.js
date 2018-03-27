@@ -3,11 +3,11 @@ const ROLES = {
   'mine': require('role.miner')
 };
 
-class NeedAssigner {
+const NeedAssigner = {
 
-  assignNeedsToCreeps(container) {
+  assignNeedsToCreeps: function(container) {
     for (let name in Game.creeps) {
-      const creep = Game.creeps["name"];
+      const creep = Game.creeps[name];
 
       const role = ROLES[creep.memory.role];
       if (!role) {

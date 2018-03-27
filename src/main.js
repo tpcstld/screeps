@@ -39,6 +39,7 @@ const processors = [
 ];
 
 const NeedContainer = require('NeedContainer');
+const NeedAssigner = require('NeedAssigner');
 
 module.exports.loop = function () {
     for(var i in Memory.creeps) {
@@ -53,8 +54,9 @@ module.exports.loop = function () {
       container.addNeeds(advisor.getNeeds());
     }
 
-    const needs = container.getNeeds();
+    NeedAssigner.assignNeedsToCreeps(container);
 
+    const needs = container.getNeeds();
     if (needs.length > 0) {
       console.log(JSON.stringify(needs));
     }
