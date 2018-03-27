@@ -10,7 +10,6 @@ let roleMiner = {
     return null;
   },
 
-  /** @param {Creep} creep **/
   run: function(creep, need) {
     const target = need.target;
     if (!target) {

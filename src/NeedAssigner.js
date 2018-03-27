@@ -1,4 +1,3 @@
-
 const ROLES = {
   'mine': require('role.miner')
 };

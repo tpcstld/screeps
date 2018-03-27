@@ -6,7 +6,6 @@ const ROLES = {
     "upgrade": require('role.upgrader'),
     "build": require("role.builder"),
     "repair": require('role.repairer'),
-    'mine': require('role.miner'),
     'run': require('role.runner'),
     'attack': require('role.attacker'),
     'remoteMine': require('role.remote_miner'),
