@@ -1,10 +1,5 @@
 const KITS = require('constants.kits');
 
-const NEED_ORDER = [
-  "spawn",
-  "mine",
-];
-
 const SpawnProcessor = {
 
   // TODO: Multiple spawns.
