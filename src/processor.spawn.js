@@ -2,12 +2,10 @@ const KITS = require('constants.kits');
 
 const SpawnProcessor = {
 
-  filterNeeds: function(needs) {
-    return _.filter(needs, n => n.type == "spawn");
-  },
-
   // TODO: Multiple spawns.
   solveNeeds: function(needs) {
+    needs = _.filter(needs, n => n.type == "spawn");
+
     const needsByRoom = _.groupBy(needs, n => n.room);
     for (let name in needsByRoom) {
       const nextCreep = needsByRoom[name][0];

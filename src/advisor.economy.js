@@ -33,6 +33,11 @@ const EconomyAdvisor = {
     }
 
     // Every room needs one refiller.
+    needs.push({
+        type: "refill",
+        room: room.name,
+    });
+
     const refillers = _.filter(roomCreeps, c => c.memory.role == "refill");
     if (refillers.length < 1) {
       needs.push({

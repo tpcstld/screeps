@@ -61,7 +61,7 @@ module.exports.loop = function () {
     }
     for (let name in processors) {
       const processor = processors[name];
-      processor.solveNeeds(processor.filterNeeds(needs))
+      processor.solveNeeds(needs);
     }
 
     loopSpawn.run(Game.spawns["Spawn1"])
