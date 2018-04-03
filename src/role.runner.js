@@ -1,6 +1,7 @@
 const utilsLoad = require('utils.load');
 const utilsEnergy = require('utils.energy');
 const utilsMovement = require('utils.movement');
+const utilsHarvest = require('utils.harvest');
 
 const roleRunner = {
 
@@ -42,11 +43,10 @@ const roleRunner = {
               }
             }
             if (target) {
-              // TODO: Withdraw every resource.
-                if (creep.pickup(target) == ERR_NOT_IN_RANGE || creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.travelTo(target);
-                }
-                utilsLoad.claimTarget(creep, target, "take");
+              if (!utilsHarvest.withdrawAll(creep, target) == ERR_NOT_IN_RANGE) {
+                creep.travelTo(target);
+              }
+              utilsLoad.claimTarget(creep, target, "take");
             } else {
                 utilsLoad.clearTarget(creep);
                 creep.idle();

@@ -58,6 +58,22 @@ let utilsHarvest = {
             utilsLoad.clearTarget(creep);
             return null;
         }
+    },
+
+    withdrawAll: function(creep, target) {
+      const store = target.store;
+      if (!store) {
+        return creep.pickup(target);
+      }
+
+      for (let key in store) {
+        let result = creep.withdraw(target, key);
+        if (result != OK) {
+          return result;
+        }
+      }
+
+      return OK;
     }
 };
 
