@@ -7,14 +7,15 @@ const SpawnProcessor = {
     needs = _.filter(needs, n => n.type == "spawn");
 
     const needsByRoom = _.groupBy(needs, n => n.room);
-    for (let name in needsByRoom) {
-      const nextCreep = needsByRoom[name][0];
 
-      const spawn = Game.rooms[name].find(FIND_STRUCTURES, {
-          filter: s => s.structureType == STRUCTURE_SPAWN
-      })[0];
+    for (let name in Game.spawns) {
+      const spawn = Game.spawns[name];
+      const room = spawn.room;
 
-      this.spawnCreep(spawn, nextCreep.role, nextCreep.memory);
+      const nextCreep = needsByRoom[room.name][0];
+      if (nextCreep) {
+        this.spawnCreep(spawn, nextCreep.role, nextCreep.memory);
+      }
     }
   },
 
