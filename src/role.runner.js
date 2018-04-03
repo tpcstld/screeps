@@ -34,10 +34,13 @@ const roleRunner = {
               });
             }
             if (!target) {
+              let storage = creep.room.find(FIND_STRUCTURES, {
+                  filter: s => s.structureType == STRUCTURE_STORAGE
+              });
               let containers = creep.room.find(FIND_STRUCTURES, {
                   filter: s => s.structureType === STRUCTURE_CONTAINER
               });
-              if (containers.length > 0) {
+              if (containers.length > 0 && storage.length > 0) {
                 containers = _.sortBy(containers, c => -(_.sum(c.store) - (creep.carryCapacity * utilsLoad.getTargetCount(creep, c, "take"))));
                 target = containers[0];
               }
