@@ -28,7 +28,7 @@ const utilsFind = {
       }));
       rooms = _.filter(rooms, r => r.route != ERR_NO_PATH);
 
-      const closestRoom = _.minBy(rooms, r => r.route.length);
+      const closestRoom = _.min(rooms, r => r.route.length);
       return closestRoom.room;
     },
 };
