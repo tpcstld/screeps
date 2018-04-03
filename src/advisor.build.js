@@ -24,7 +24,7 @@ const BuildAdvisor = {
       output.push({
           type: "spawn",
           role: "build",
-          room: utilsFind.findClosestOwnedRoom(Game.getObjectById(buildNeeds[0].site).room).name
+          room: utilsFind.findClosestOwnedRoom(Game.getObjectById(buildNeeds[0].target).room).name
       });
     }
 
@@ -50,7 +50,7 @@ const BuildAdvisor = {
       const site = Game.constructionSites[name];
       needs.push({
           type: 'build',
-          site: site.id,
+          target: site.id,
       });
     }
 
