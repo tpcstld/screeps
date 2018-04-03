@@ -83,7 +83,7 @@ const EconomyAdvisor = {
     if (storage.length > 0) {
       energy = energy + roomStats.containerEnergy;
     }
-    const numRunners = Math.max(Math.ceil((energy + 1500) / 2000), 3);
+    const numRunners = Math.min(Math.ceil((energy + 1500) / 2000), 3);
 
     return this.fillSpawnNeedForRoom(room, numRunners, "run");
   },
