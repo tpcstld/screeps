@@ -10,7 +10,7 @@ const roleRunner = {
 
       const homeRoom = creep.memory.homeRoom;
       if (creep.room.name != homeRoom) {
-        creep.travelTo(Game.getObjectById(homeRoom).controller);
+        creep.travelTo(Game.rooms[homeRoom].controller);
         return;
       }
 
