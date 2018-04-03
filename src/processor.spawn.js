@@ -7,6 +7,9 @@ const SpawnProcessor = {
     needs = _.filter(needs, n => n.type == "spawn");
 
     const needsByRoom = _.groupBy(needs, n => n.room);
+
+    const freeSpawns = [];
+
     for (let name in Game.spawns) {
       const spawn = Game.spawns[name];
       const room = spawn.room;
@@ -14,8 +17,30 @@ const SpawnProcessor = {
       const nextCreep = (needsByRoom[room.name] || [])[0];
       if (nextCreep) {
         this.spawnCreep(spawn, nextCreep);
+        nextCreep.fulfilled = true;
       } else {
+        freeSpawns.push(spawn);
       }
+    }
+
+    for (let name in needsByRoom) {
+      if (freeSpawns.length == 0) {
+        break;
+      }
+
+      const roomNeeds = needsByRoom[name];
+      if (roomNeeds.length <= 4) {
+        continue;
+      }
+
+      const need = _.filter(roomNeeds, n => !n.fulfilled)[0];
+      if (!need) {
+        continue;
+      }
+
+      const freeSpawn = freeSpawns.pop();
+
+      this.spawnCreep(freeSpawn, need);
     }
   },
 
