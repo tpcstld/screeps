@@ -19,7 +19,7 @@ const kits = {
       return resolveTemplate([WORK, CARRY, MOVE], Math.min(energy, 900));
     }
 
-    return resolveTemplate([WORK], Math.min(energy - 150, 900)).concat([CARRY, MOVE, MOVE]),
+    return resolveTemplate([WORK], Math.min(energy - 150, 900)).concat([CARRY, MOVE, MOVE]);
   },
   'repair': (energy, room) => resolveTemplate([WORK, CARRY, MOVE], Math.min(energy, 800)),
   'build': (energy, room) => resolveTemplate([WORK, CARRY, MOVE], Math.min(energy, 800)),
