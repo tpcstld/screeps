@@ -1,5 +1,6 @@
 const ROLES = {
-  'mine': require('role.miner')
+  'mine': require('role.miner'),
+  'upgrade': require('role.upgrader'),
 };
 
 const NeedAssigner = {

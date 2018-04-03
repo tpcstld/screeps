@@ -9,7 +9,6 @@ let roleMiner = {
     if (needs.length == 0) {
       return null;
     }
-
     return needs[0];
   },
 

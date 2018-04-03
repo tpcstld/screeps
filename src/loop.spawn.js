@@ -4,7 +4,6 @@ const loopSpawn = {
         {type: 'invader', refundable: true, num: (spawn) => Math.ceil(_.max(_.map(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0)) / 5)},
         {type: 'attack', num: (spawn) => 0},
         {type: 'heal', num: (spawn) => 0},
-        {type: 'upgrade', num: (spawn) => 2},
         {type: 'build', refundable: true, num: (spawn) => Math.min(2, Object.keys(Game.constructionSites).length)},
         {type: 'repair', num: (spawn) => 2},
         {type: 'remoteMine', num: (spawn) => 1},

@@ -11,6 +11,7 @@ function resolveTemplate(parts, energy) {
 
 const kits = {
   'refill': (energy) => [CARRY, CARRY, CARRY, CARRY, MOVE, MOVE],
+  'upgrade': (energy) => resolveTemplate([WORK], Math.min(energy - 150, 900)).concat([CARRY, MOVE, MOVE]),
   'mine': (energy) => resolveTemplate([WORK], Math.min(energy - 50, 500)).concat([MOVE]),
   'run': (energy) => resolveTemplate([CARRY, CARRY, MOVE], Math.min(energy, 600)),
   'link_refiller': (energy) => [CARRY, MOVE],

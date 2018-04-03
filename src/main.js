@@ -3,7 +3,6 @@ const PROTOTYPES = [
 ];
 
 const ROLES = {
-    "upgrade": require('role.upgrader'),
     "build": require("role.builder"),
     "repair": require('role.repairer'),
     'run': require('role.runner'),
@@ -30,7 +29,7 @@ const advisors = [
   // require('advisor.command'),
   require('advisor.economy'),
   // require('advisor.build'),
-  // require('advisor.upgrade'),
+  require('advisor.upgrade'),
 ];
 
 const processors = [
