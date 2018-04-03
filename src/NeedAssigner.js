@@ -1,6 +1,7 @@
 const ROLES = {
   'mine': require('role.miner'),
   'upgrade': require('role.upgrader'),
+  'repair': require('role.repairer'),
 };
 
 const NeedAssigner = {
@@ -16,9 +17,6 @@ const NeedAssigner = {
 
       const needs = container.getNeeds();
       const chosenNeed = role.getNeed(creep, needs);
-      if (!chosenNeed)  {
-        continue;
-      }
 
       role.run(creep, chosenNeed);
       container.fulfillNeed(chosenNeed);

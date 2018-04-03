@@ -13,6 +13,9 @@ class NeedContainer {
   }
 
   fulfillNeed(need) {
+    if (!need) {
+      return;
+    }
     // Objects are by-reference.
     need.fulfilled = true;
   }

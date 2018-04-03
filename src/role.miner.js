@@ -4,12 +4,8 @@ let roleMiner = {
 
   getNeed: function(creep, needs) {
     const target = creep.memory.target;
-    needs = _.filter(needs, n => n.type == "mine" && n.target == target);
 
-    if (needs.length == 0) {
-      return null;
-    }
-    return needs[0];
+    return _.filter(needs, n => n.type == "mine" && n.target == target)[0];
   },
 
   run: function(creep, need) {
