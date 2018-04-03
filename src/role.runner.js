@@ -6,6 +6,13 @@ const roleRunner = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
+
+      const homeRoom = creep.memory.homeRoom;
+      if (creep.room.name != homeRoom) {
+        creep.travelTo(Game.getObjectById(homeRoom).controller);
+        return;
+      }
+
         if (creep.memory.working && _.sum(creep.carry) == 0) {
             creep.memory.working = false;
         }
