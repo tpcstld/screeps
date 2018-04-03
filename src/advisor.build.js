@@ -18,7 +18,7 @@ const BuildAdvisor = {
     // Builders
     const buildNeeds = _.filter(needs, n => n.type == "build");
     const builders = _.filter(Game.creeps, c => c.memory.role == "build");
-    const numBuilders = Math.ceil(buildNeeds.length / 2 - builders.length);
+    const numBuilders = Math.ceil(buildNeeds.length / 4 - builders.length);
 
     for (let i = 0; i < numBuilders; i++) {
       output.push({
@@ -49,7 +49,7 @@ const BuildAdvisor = {
     for (let name in Game.constructionSites) {
       const site = Game.constructionSites[name];
 
-      const numWorkItems = Math.floor(site.progressTotal / 2000);
+      const numWorkItems = Math.ceil(site.progressTotal / 2000);
       for (let i = 0; i < numWorkItems; i++) {
         needs.push({
             type: 'build',
