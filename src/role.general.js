@@ -4,7 +4,7 @@ const utilsLoad = require('utils.load');
 const constants = require('utils.constants');
 
 
-let roleBuilder = {
+let roleGeneral = {
 
     run: function(creep) {
 
@@ -29,4 +29,4 @@ let roleBuilder = {
     }
 };
 
-module.exports = roleBuilder;
+module.exports = roleGeneral;
