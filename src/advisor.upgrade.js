@@ -16,11 +16,11 @@ const UpgradeAdvisor = {
   getSpawnNeeds: function(needs) {
     needs = _.filter(needs, n => n.type == "upgrade");
 
-    return needs.map(n => {
+    return needs.map(n => ({
         type: "spawn",
         role: "upgrade",
         room: n.room
-    });
+    }));
   },
 
   // TODO: There should be a smarter way to find out how many upgraders to use.

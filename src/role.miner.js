@@ -14,12 +14,12 @@ let roleMiner = {
   },
 
   run: function(creep, need) {
-    const target = creep.memory.target;
+    const target = Game.getObjectById(creep.memory.target);
     if (!target) {
       return;
     }
 
-    const travelTarget = target;
+    let travelTarget = target;
     const containers = target.pos.findInRange(FIND_STRUCTURES, 1, {
         filter: s => s.structureType === STRUCTURE_CONTAINER
     });

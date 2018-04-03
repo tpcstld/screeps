@@ -55,14 +55,15 @@ module.exports.loop = function () {
 
     NeedAssigner.assignNeedsToCreeps(container);
 
-    const needs = container.getNeeds();
-    if (needs.length > 0) {
-      console.log(JSON.stringify(needs));
-    }
+    let needs = container.getNeeds();
 
     for (let name in advisors) {
       const advisor = advisors[name];
-      needs = needs.concat(advisor.getSpawnNeeds());
+      needs = needs.concat(advisor.getSpawnNeeds(needs));
+    }
+
+    if (needs.length > 0) {
+      console.log(JSON.stringify(needs));
     }
 
     for (let name in processors) {

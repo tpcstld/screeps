@@ -22,10 +22,10 @@ const utilsFind = {
       }
 
       let rooms = _.filter(Game.rooms, opts.filter);
-      rooms = _.map(rooms, r => {
+      rooms = _.map(rooms, r => ({
           room: r,
           route: Game.map.findRoute(r, targetRoom)
-      });
+      }));
       rooms = _.filter(rooms, r => r.route != ERR_NO_PATH);
 
       const closestRoom = _.minBy(rooms, r => r.route.length);
