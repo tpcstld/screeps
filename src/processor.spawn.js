@@ -12,7 +12,7 @@ const SpawnProcessor = {
       const spawn = Game.spawns[name];
       const room = spawn.room;
 
-      const nextCreep = needsByRoom[room.name][0];
+      const nextCreep = (needsByRoom[room.name] || [])[0];
       if (nextCreep) {
         this.spawnCreep(spawn, nextCreep.role, nextCreep.memory);
       }
