@@ -32,7 +32,12 @@ const UpgradeAdvisor = {
       return [];
     }
 
-    for (let i = 0; i < 2; i++) {
+    const link = room.controller.pos.findInRange(FIND_STRUCTURES, 3, {
+        filter: s => s.structureType == STRUCTURE_LINK
+    })[0];
+
+    const numUpgraders = link ? 2 : 4;
+    for (let i = 0; i < numUpgraders; i++) {
       needs.push({
           type: 'upgrade',
           room: room.name,
