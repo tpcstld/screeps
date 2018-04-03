@@ -28,7 +28,7 @@ const loopStats = require('loop.stats');
 const advisors = [
   // require('advisor.command'),
   require('advisor.economy'),
-  // require('advisor.build'),
+  require('advisor.build'),
   require('advisor.upgrade'),
 ];
 
