@@ -20,12 +20,8 @@ const SpawnProcessor = {
     }
   },
 
-  getSpawnBuilderNeeds: function(needs) {
-    const buildNeeds = _.filter(needs, n => n.type == "build");
-  },
-
   spawnCreep: function(spawn, creepInfo) {
-    const memory = creepInfo.memory;
+    let memory = creepInfo.memory;
     if (!memory) {
       memory = {};
     }
