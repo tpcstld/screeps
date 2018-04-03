@@ -36,7 +36,14 @@ const UpgradeAdvisor = {
         filter: s => s.structureType == STRUCTURE_LINK
     })[0];
 
-    const numUpgraders = link ? 2 : 4;
+    let numUpgraders = 2;
+    if (!link) {
+      const roomStats = Memory.stats.rooms[room.name];
+      const totalEnergy = roomStats.storageEnergy + roomStats.spawnEnergy + roomStats.droppedEnergy;
+
+      numUpgraders = Math.ceil(totalEnergy / 2000);
+    }
+
     for (let i = 0; i < numUpgraders; i++) {
       needs.push({
           type: 'upgrade',
