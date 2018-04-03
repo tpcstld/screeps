@@ -34,6 +34,7 @@ const roleRepairer = {
 
     if (!creep.memory.working) {
       utilsHarvest.getEnergyFromContainers(creep);
+      return;
     }
 
     const target = Game.getObjectById(creep.memory.target);
