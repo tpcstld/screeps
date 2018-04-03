@@ -14,7 +14,8 @@ const SpawnProcessor = {
 
       const nextCreep = (needsByRoom[room.name] || [])[0];
       if (nextCreep) {
-        this.spawnCreep(spawn, nextCreep.role, nextCreep.memory);
+        this.spawnCreep(spawn, nextCreep);
+      } else {
       }
     }
   },
@@ -23,18 +24,19 @@ const SpawnProcessor = {
     const buildNeeds = _.filter(needs, n => n.type == "build");
   },
 
-  spawnCreep: function(spawn, role, memory) {
+  spawnCreep: function(spawn, creepInfo) {
+    const memory = creepInfo.memory;
+    if (!memory) {
+      memory = {};
+    }
+
     const spawnStructures = spawn.room.find(FIND_STRUCTURES, {
         filter: s => s.structureType === STRUCTURE_EXTENSION || s.structureType === STRUCTURE_SPAWN
     });
     const capacity = _.sum(spawnStructures, s => s.energyCapacity);
 
-    if (!memory) {
-      memory = {};
-    }
-
-    memory["role"] = role;
-    memory["homeRoom"] = spawn.room.name;
+    memory["role"] = creepInfo.role;
+    memory["homeRoom"] = creepInfo.room;
 
     return spawn.spawnCreep(KITS[role](capacity), "Bot" + Game.time, {
       memory: memory
