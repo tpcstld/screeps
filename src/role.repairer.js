@@ -17,39 +17,41 @@ const roleRepairer = {
     }
 
     const need = _.filter(needs, n => n.type == "repair")[0];
-    creep.memory.target = need.target;
+    if (need) {
+      creep.memory.target = need.target;
+    }
     return need;
   },
 
   run: function(creep, need) {
-      if (creep.memory.working && creep.carry.energy == 0) {
-        creep.memory.target = null;
-        creep.memory.working = false;
-      }
-      if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
-          creep.memory.working = true;
-      }
+    if (creep.memory.working && creep.carry.energy == 0) {
+      creep.memory.target = null;
+      creep.memory.working = false;
+    }
+    if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+        creep.memory.working = true;
+    }
 
-      if (!creep.memory.working) {
-        utilsHarvest.getEnergyFromContainers(creep);
-      }
+    if (!creep.memory.working) {
+      utilsHarvest.getEnergyFromContainers(creep);
+    }
 
-      const target = Game.getObjectById(creep.memory.target);
-      if (!target) {
-        creep.memory.target = null;
-        creep.idle();
-        return;
-      }
+    const target = Game.getObjectById(creep.memory.target);
+    if (!target) {
+      creep.memory.target = null;
+      creep.idle();
+      return;
+    }
 
-      const maxHp = constants.MAX_HP[target.structureType] || target.hitMax;
-      if (target.hits >= maxHp) {
-        creep.memory.target = null;
-        return;
-      }
+    const maxHp = constants.MAX_HP[target.structureType] || target.hitMax;
+    if (target.hits >= maxHp) {
+      creep.memory.target = null;
+      return;
+    }
 
-      if (creep.repair(target) == ERR_NOT_IN_RANGE) {
-        creep.travelTo(target);
-      }
+    if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+      creep.travelTo(target);
+    }
   }
 };
 
