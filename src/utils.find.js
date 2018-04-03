@@ -22,6 +22,7 @@ const utilsFind = {
       }
 
       let rooms = _.filter(Game.rooms, opts.filter);
+      rooms = _.filter(rooms, r => r.controller.my);
       rooms = _.map(rooms, r => ({
           room: r,
           route: Game.map.findRoute(r, targetRoom)

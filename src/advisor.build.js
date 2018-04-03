@@ -21,7 +21,7 @@ const BuildAdvisor = {
     const numBuilders = Math.ceil(buildNeeds.length / 4 - builders.length);
 
     for (let i = 0; i < numBuilders; i++) {
-      output.append({
+      output.push({
           type: "spawn",
           role: "build",
           room: utilsFind.findClosestOwnedRoom(Game.getObjectById(buildNeeds[0].site).room).name
@@ -34,7 +34,7 @@ const BuildAdvisor = {
     const numRepairers = Math.ceil(repairNeeds.length / 4 - repairers.length);
 
     for (let i = 0; i < numRepairers; i++) {
-      output.append({
+      output.push({
           type: "spawn",
           role: "repair",
           room: utilsFind.findClosestOwnedRoom(Game.getObjectById(repairNeeds[0].target).room).name
