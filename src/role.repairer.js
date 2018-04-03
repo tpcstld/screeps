@@ -5,6 +5,9 @@ const utilsFind = require('utils.find');
 
 const roleRepairer = {
 
+  getNeed: function(creep, needs) {
+  },
+
     run: function(creep) {
 
         if (creep.memory.working && creep.carry.energy == 0) {
