@@ -43,7 +43,7 @@ const roleRunner = {
               }
             }
             if (target) {
-              if (!utilsHarvest.withdrawAll(creep, target) == ERR_NOT_IN_RANGE) {
+              if (utilsHarvest.withdrawAll(creep, target) == ERR_NOT_IN_RANGE) {
                 creep.travelTo(target);
               }
               utilsLoad.claimTarget(creep, target, "take");
