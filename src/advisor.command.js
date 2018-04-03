@@ -12,11 +12,11 @@ const CommandAdvisor = {
     needs = _.filter(needs, n => n.type == "colonize");
 
     // TODO: Closest room.
-    return needs.map(n => {
+    return needs.map(n => ({
         type: "spawn",
         role: "colonize",
-        room: utilsFind.findClosestOwnedRoom(n.pos.roomName),
-    });
+        room: utilsFind.findClosestOwnedRoom(n.pos.roomName).name,
+    }));
   },
 
   colonize: function() {

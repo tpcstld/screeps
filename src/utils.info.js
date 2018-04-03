@@ -9,6 +9,16 @@ const utilsInfo = {
         }
         return null;
     },
+
+    isRoomOwned: function(room) {
+      if (!room.controller.my) {
+        return false;
+      }
+
+      return room.find(FIND_STRUCTURES, {
+          filter: s => s.structureType == STRUCTURE_SPAWN
+      })[0];
+    },
 };
 
 

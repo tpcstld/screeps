@@ -1,3 +1,4 @@
+const utilsInfo = require('utils.info');
 
 const EconomyAdvisor = {
 
@@ -26,7 +27,7 @@ const EconomyAdvisor = {
   },
 
   getNeedsForRoom: function(room) {
-    if (room.controller.my) {
+    if (utilsInfo.isRoomOwned(room)) {
       return this.getNeedsForSpawnRoom(room);
     }
     return [];

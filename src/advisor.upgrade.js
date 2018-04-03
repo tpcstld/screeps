@@ -1,3 +1,4 @@
+const utilsInfo = require('utils.info');
 
 const UpgradeAdvisor = {
 
@@ -27,7 +28,7 @@ const UpgradeAdvisor = {
   getNeedsForUpgradeForRoom: function(room) {
     const needs = [];
 
-    if (!room.controller.my) {
+    if (!utilsInfo.isRoomOwned(room)) {
       return [];
     }
 

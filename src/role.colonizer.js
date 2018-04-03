@@ -1,6 +1,10 @@
 const roleColonizer = {
 
-  run: function(creep) {
+  getNeed: function(creep, needs) {
+    return _.filter(needs, n => n.type == "colonize")[0];
+  },
+
+  run: function(creep, need) {
     const flag = Game.flags["Colony"];
     if (!flag) {
       return;

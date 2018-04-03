@@ -3,6 +3,7 @@ const ROLES = {
   'upgrade': require('role.upgrader'),
   'repair': require('role.repairer'),
   'build': require('role.builder'),
+  'colonize': require('role.colonizer'),
 };
 
 const NeedAssigner = {
