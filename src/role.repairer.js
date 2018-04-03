@@ -43,7 +43,7 @@ const roleRepairer = {
       return;
     }
 
-    const maxHp = constants.MAX_HP[target.structureType] || target.hitMax;
+    const maxHp = constants.MAX_HP[target.structureType] || target.hitsMax;
     if (target.hits >= maxHp) {
       creep.memory.target = null;
       return;

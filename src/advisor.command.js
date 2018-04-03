@@ -1,3 +1,4 @@
+const utilsFind = require('utils.find');
 
 const CommandAdvisor = {
 
@@ -14,7 +15,7 @@ const CommandAdvisor = {
     return needs.map(n => {
         type: "spawn",
         role: "upgrade",
-        room: Game.spawns["Spawn1"].room.name,
+        room: utilsFind.findClosestOwnedRoom(n.pos.roomName),
     });
   },
 
