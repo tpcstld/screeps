@@ -14,7 +14,7 @@ const CommandAdvisor = {
     // TODO: Closest room.
     return needs.map(n => {
         type: "spawn",
-        role: "upgrade",
+        role: "colonize",
         room: utilsFind.findClosestOwnedRoom(n.pos.roomName),
     });
   },
