@@ -48,10 +48,14 @@ const BuildAdvisor = {
     const needs = [];
     for (let name in Game.constructionSites) {
       const site = Game.constructionSites[name];
-      needs.push({
-          type: 'build',
-          target: site.id,
-      });
+
+      const numWorkItems = Math.floor(site.progressTotal / 1500);
+      for (let i = 0; i < numWorkItems; i++) {
+        needs.push({
+            type: 'build',
+            target: site.id,
+        });
+      }
     }
 
     return needs;

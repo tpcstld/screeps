@@ -1,3 +1,4 @@
+const utilsInfo = require('utils.info');
 
 const utilsFind = {
 
@@ -22,7 +23,7 @@ const utilsFind = {
       }
 
       let rooms = _.filter(Game.rooms, opts.filter);
-      rooms = _.filter(rooms, r => r.controller.my);
+      rooms = _.filter(rooms, r => utilsInfo.isRoomOwned(r));
       rooms = _.map(rooms, r => ({
           room: r,
           route: Game.map.findRoute(r, targetRoom)
