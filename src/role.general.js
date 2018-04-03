@@ -16,7 +16,11 @@ let roleBuilder = {
         }
 
         if (creep.memory.building) {
-            utilsEnergy.placeEnergy(creep);
+          const homeRoom = Game.rooms[creep.memory.homeRoom];
+          const controller = homeRoom.controller;
+          if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
+            creep.travelTo(controller);
+          }
         } else {
             if (!utilsHarvest.getEnergyFromContainers(creep)) {
                 utilsHarvest.harvestRandom(creep, 4);
