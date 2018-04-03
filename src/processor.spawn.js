@@ -4,11 +4,12 @@ const SpawnProcessor = {
 
   // TODO: Multiple spawns.
   solveNeeds: function(needs) {
-    needs = this.convertNeeds(needs);
+    needs = _.filter(needs, n => n.type == "spawn");
 
     const needsByRoom = _.groupBy(needs, n => n.room);
     for (let name in needsByRoom) {
       const nextCreep = needsByRoom[name][0];
+
       const spawn = Game.rooms[name].find(FIND_STRUCTURES, {
           filter: s => s.structureType == STRUCTURE_SPAWN
       })[0];
@@ -17,30 +18,9 @@ const SpawnProcessor = {
     }
   },
 
-  convertNeeds: function(needs) {
-    const output = [];
-    for (let name in needs) {
-      const need = needs[name];
-
-      if (need.type == "spawn") {
-        output.push(need);
-        return;
-      }
-
-      if (need.type == "mine") {
-        output.push({
-            type: "spawn",
-            role: "mine",
-            room: Game.getObjectById(need.target).name,
-            memory: {
-              target: need.target
-            },
-        });
-      }
-    }
-
-    return output;
-  }
+  getSpawnBuilderNeeds: function(needs) {
+    const buildNeeds = _.filter(needs, n => n.type == "build");
+  },
 
   spawnCreep: function(spawn, role, memory) {
     const spawnStructures = spawn.room.find(FIND_STRUCTURES, {

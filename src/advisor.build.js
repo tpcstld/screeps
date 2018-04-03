@@ -3,7 +3,7 @@ const constants = require('utils.constants');
 
 const BuildAdvisor = {
 
-  getNeeds: function() {
+  getCreepNeeds: function() {
     let needs = [];
 
     needs = needs.concat(this.getNeedsForConstructionSites());
@@ -12,13 +12,45 @@ const BuildAdvisor = {
     return needs;
   },
 
+  getSpawnNeeds: function(needs) {
+    const output = [];
+
+    // Builders
+    const buildNeeds = _.filter(needs, n => n.type == "build");
+    const builders = _.filter(Game.creeps, c => c.memory.role == "build");
+    const numBuilders = Math.ceil(buildNeeds.length / 4 - builders.length);
+
+    for (let i = 0; i < numBuilders; i++) {
+      output.append({
+          type: "spawn",
+          role: "build",
+          room: utilsFind.findClosestOwnedRoom(Game.getObjectById(buildNeeds[0].site).room).name
+      });
+    }
+
+    // Repairers
+    const repairNeeds = _.filter(needs, n => n.type == "repair");
+    const repairers = _.filter(Game.creeps, c => c.memory.role == "repair");
+    const numRepairers = Math.ceil(repairNeeds.length / 4 - repairers.length);
+
+    for (let i = 0; i < numRepairers; i++) {
+      output.append({
+          type: "spawn",
+          role: "repair",
+          room: utilsFind.findClosestOwnedRoom(Game.getObjectById(repairNeeds[0].target).room).name
+      });
+    }
+
+    return output;
+  },
+
   getNeedsForConstructionSites: function() {
     const needs = [];
     for (let name in Game.constructionSites) {
       const site = Game.constructionSites[name];
       needs.push({
           type: 'build',
-          site: site,
+          site: site.id,
       });
     }
 
@@ -39,7 +71,7 @@ const BuildAdvisor = {
       const target = targets[name];
       needs.push({
           type: 'repair',
-          id: target.id,
+          target: target.id,
       });
     }
 

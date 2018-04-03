@@ -1,7 +1,7 @@
 
 const EconomyAdvisor = {
 
-  getNeeds: function() {
+  getCreepNeeds: function() {
     let needs = [];
     for (let name in Game.rooms) {
       const room = Game.rooms[name];
@@ -10,6 +10,19 @@ const EconomyAdvisor = {
     }
 
     return needs;
+  },
+
+  getSpawnNeeds: function(needs) {
+    const mineNeeds = _.filter(needs, n => n.type == "mine");
+
+    return mineNeeds.map(n => {
+        type: "spawn",
+        role: "mine",
+        room: Game.getObjectById(n.target).room.name,
+        memory: {
+          target: n.target
+        },
+    });
   },
 
   getNeedsForRoom: function(room) {

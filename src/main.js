@@ -27,10 +27,10 @@ const loopSpawn = require('loop.spawn');
 const loopStats = require('loop.stats');
 
 const advisors = [
-  require('advisor.command'),
+  // require('advisor.command'),
   require('advisor.economy'),
-  require('advisor.build'),
-  require('advisor.upgrade'),
+  // require('advisor.build'),
+  // require('advisor.upgrade'),
 ];
 
 const processors = [
@@ -50,7 +50,7 @@ module.exports.loop = function () {
     const container = new NeedContainer();
     for (let name in advisors) {
       const advisor = advisors[name];
-      container.addNeeds(advisor.getNeeds());
+      container.addNeeds(advisor.getCreepNeeds());
     }
 
     NeedAssigner.assignNeedsToCreeps(container);
@@ -59,6 +59,12 @@ module.exports.loop = function () {
     if (needs.length > 0) {
       console.log(JSON.stringify(needs));
     }
+
+    for (let name in advisors) {
+      const advisor = advisors[name];
+      needs = needs.concat(advisor.getSpawnNeeds());
+    }
+
     for (let name in processors) {
       const processor = processors[name];
       processor.solveNeeds(needs);
@@ -67,13 +73,15 @@ module.exports.loop = function () {
     loopSpawn.run(Game.spawns["Spawn1"])
 
     for (let name in Game.creeps) {
-        let creep = Game.creeps[name];
+        const creep = Game.creeps[name];
         if (creep.memory.refund) {
             creep.refund();
             continue;
         }
-        if (creep.memory.role) {
-            ROLES[creep.memory.role].run(creep);
+
+        const role = ROLES[creep.memory.role];
+        if (role) {
+          role.run(creep);
         }
     }
 
