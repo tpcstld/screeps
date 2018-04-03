@@ -7,7 +7,6 @@ const SpawnProcessor = {
     needs = _.filter(needs, n => n.type == "spawn");
 
     const needsByRoom = _.groupBy(needs, n => n.room);
-
     for (let name in Game.spawns) {
       const spawn = Game.spawns[name];
       const room = spawn.room;
