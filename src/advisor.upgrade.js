@@ -27,6 +27,10 @@ const UpgradeAdvisor = {
   getNeedsForUpgradeForRoom: function(room) {
     const needs = [];
 
+    if (!room.controller.my) {
+      return [];
+    }
+
     for (let i = 0; i < 2; i++) {
       needs.push({
           type: 'upgrade',

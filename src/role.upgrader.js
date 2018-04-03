@@ -3,9 +3,9 @@ const utilsHarvest = require('utils.harvest');
 var roleUpgrader = {
 
   getNeed: function(creep, needs) {
-    const home = Game.getObjectById(creep.memory.home);
+    const homeRoom = Game.rooms[creep.memory.homeRoom];
 
-    needs = _.filter(needs, n => n.type == "upgrade" && n.room = home.name);
+    needs = _.filter(needs, n => n.type == "upgrade" && n.room == homeRoom.name);
 
     if (needs.length == 0) {
       return null;
@@ -31,8 +31,8 @@ var roleUpgrader = {
           }
       }
       if (state == 'upgrade') {
-        const home = Game.getObjectById(creep.memory.home);
-        const controller = home.room.controller;
+        const homeRoom = Game.rooms[creep.memory.homeRoom];
+        const controller = homeRoom.controller;
         if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
           creep.travelTo(controller);
         }
