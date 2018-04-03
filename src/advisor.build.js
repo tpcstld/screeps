@@ -18,7 +18,7 @@ const BuildAdvisor = {
     // Builders
     const buildNeeds = _.filter(needs, n => n.type == "build");
     const builders = _.filter(Game.creeps, c => c.memory.role == "build");
-    const numBuilders = Math.ceil(buildNeeds.length / 1 - builders.length);
+    const numBuilders = Math.ceil(buildNeeds.length / 2 - builders.length);
 
     for (let i = 0; i < numBuilders; i++) {
       output.push({
