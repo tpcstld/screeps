@@ -20,6 +20,7 @@ const SpawnProcessor = {
   },
 
   spawnCreep: function(spawn, creepInfo) {
+    const role = creepInfo.role;
     let memory = creepInfo.memory;
     if (!memory) {
       memory = {};
@@ -30,7 +31,7 @@ const SpawnProcessor = {
     });
     const capacity = _.sum(spawnStructures, s => s.energyCapacity);
 
-    memory["role"] = creepInfo.role;
+    memory["role"] = role;
     memory["homeRoom"] = creepInfo.room;
 
     return spawn.spawnCreep(KITS[role](capacity), "Bot" + Game.time, {
