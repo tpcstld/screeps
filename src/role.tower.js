@@ -3,7 +3,7 @@ const roleTower = {
 
     run: function(tower) {
         let target = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS, {
-            filter: _.filter(creep.body, p => p.type == HEAL).length > 0
+            filter: c => _.filter(c.body, p => p.type == HEAL).length > 0
         });
 
         if (!target) {
