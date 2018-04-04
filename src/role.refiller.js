@@ -9,14 +9,14 @@ let roleRefiller = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-        if (creep.memory.building && creep.carry.energy == 0) {
-            creep.memory.building = false;
+        if (creep.memory.working && creep.carry.energy < 50) {
+            creep.memory.working = false;
         }
-        if (!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.building = true;
+        if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.working = true;
         }
 
-        if (creep.memory.building) {
+        if (creep.memory.working) {
             if (!utilsEnergy.maybeRefillEnergy(creep)) {
                 creep.idle();
             }
