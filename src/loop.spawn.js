@@ -1,7 +1,7 @@
 const loopSpawn = {
 
     NUM_TYPES: [
-        {type: 'invader', refundable: true, num: (spawn) => Math.ceil(_.max(_.map(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0)) / 5)},
+        {type: 'invader', refundable: true, num: (spawn) => Math.ceil(_.max(_.map(Memory.stats.rooms, r => r.name != spawn.room.name ? r.numEnemies : 0)))},
         {type: 'attack', num: (spawn) => 0},
         {type: 'heal', num: (spawn) => 0},
         {type: 'remoteMine', num: (spawn) => 1},
