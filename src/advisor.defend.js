@@ -27,7 +27,7 @@ const DefendAdvisor = {
     return needs.map(n => ({
           type: "spawn",
           role: "invader",
-          room: utilsFind.findClosestOwnedRoom(n.room).name
+          room: utilsFind.findClosestOwnedRoom(Game.getObjectById(n.target).room).name
     }));
   },
 };
