@@ -49,7 +49,7 @@ const BuildAdvisor = {
     for (let name in Game.constructionSites) {
       const site = Game.constructionSites[name];
 
-      const numWorkItems = Math.ceil(site.progressTotal / 2000);
+      const numWorkItems = Math.min(Math.ceil(site.progressTotal / 2000), 5);
       for (let i = 0; i < numWorkItems; i++) {
         needs.push({
             type: 'build',
