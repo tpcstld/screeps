@@ -31,3 +31,5 @@ const DefendAdvisor = {
     }));
   },
 };
+
+module.exports = DefendAdvisor;
