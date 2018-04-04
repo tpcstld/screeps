@@ -78,7 +78,7 @@ let utilsEnergy = {
 
     maybeEnergizeTowers: function(creep) {
         const targets = utilsLoad.findAvailableTargets(creep, 1, "charge", FIND_STRUCTURES, {
-            filter: s => s.structureType === STRUCTURE_TOWER && s.energy < s.energyCapacity
+            filter: s => s.structureType === STRUCTURE_TOWER && s.energy < s.energyCapacity - creep.carryCapacity
         });
 
         const target = creep.pos.findClosestByPath(targets);
