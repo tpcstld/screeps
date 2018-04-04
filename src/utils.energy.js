@@ -39,8 +39,8 @@ let utilsEnergy = {
 
     maybeRefillEnergy: function(creep) {
       if (this.maybeEnergizeSpawns(creep)
-          || this.maybeEnergizeExtensions(creep)
-          || this.maybeEnergizeTowers(creep)) {
+        || this.maybeEnergizeTowers(creep)
+        || this.maybeEnergizeExtensions(creep)) {
         return true;
       }
 
