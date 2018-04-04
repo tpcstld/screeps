@@ -12,7 +12,6 @@ const ROLES = {
     'refill': require('role.refiller'),
     'invader': require('role.invader'),
     'invaderHeal': require('role.invader_healer'),
-    'tower': require('role.tower'),
     'link': require('role.link'),
     'link_refiller': require('role.link_refiller'),
 };
@@ -81,12 +80,6 @@ module.exports.loop = function () {
         if (role) {
           role.run(creep);
         }
-    }
-
-    const towers = _.filter(Game.structures, s => s.structureType === STRUCTURE_TOWER);
-    for (let name in towers) {
-        const tower = towers[name];
-        ROLES["tower"].run(tower);
     }
 
     const links = _.filter(Game.structures, s => s.structureType == STRUCTURE_LINK);
