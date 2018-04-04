@@ -95,5 +95,5 @@ module.exports.loop = function () {
         ROLES["link"].run(link);
     }
 
-    loopStats.run();
+    loopStats.run(container);
 }

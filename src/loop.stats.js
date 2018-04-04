@@ -2,7 +2,9 @@ const utilsFind = require('utils.find');
 
 const loopStats = {
 
-    run: function() {
+    run: function(container) {
+      const needs = container.getNeeds();
+
         Memory.stats = {
           cpu: {
             bucket: Game.cpu.bucket,
@@ -14,6 +16,9 @@ const loopStats = {
           gcl: Game.gcl,
           creeps: {
             roles: _.countBy(Game.creeps, c => c.memory.role)
+          },
+          needs: {
+            typeCount: _.countBy(needs, n => n.type),
           },
           rooms: _.mapValues(Game.rooms, r => this.getStatsForRoom(r))
         };
