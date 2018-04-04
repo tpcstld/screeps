@@ -14,34 +14,29 @@ var roleUpgrader = {
   },
 
   run: function(creep, need) {
-      var state = creep.memory.state || 'gather';
+    if (creep.memory.working && creep.carry.energy == 0) {
+      creep.memory.working = false;
+    }
+    if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+      creep.memory.working = true;
+    }
 
-      if (state == 'gather') {
-          const nearbyLinks = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-              filter: s => s.structureType == STRUCTURE_LINK
-          });
-          if (nearbyLinks.length > 0) {
-              creep.withdraw(nearbyLinks[0], RESOURCE_ENERGY);
-          } else {
-              utilsHarvest.getEnergyFromContainers(creep);
-          }
-
-          if (creep.carry.energy >= creep.carryCapacity) {
-              state = 'upgrade';
-          }
+    if (creep.memory.working) {
+      const homeRoom = Game.rooms[creep.memory.homeRoom];
+      const controller = homeRoom.controller;
+      if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
+        creep.travelTo(controller);
       }
-      if (state == 'upgrade') {
-        const homeRoom = Game.rooms[creep.memory.homeRoom];
-        const controller = homeRoom.controller;
-        if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
-          creep.travelTo(controller);
-        }
-
-        if (creep.carry.energy == 0) {
-            state = 'gather';
-        }
+    } else {
+      const nearbyLinks = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+          filter: s => s.structureType == STRUCTURE_LINK
+      });
+      if (nearbyLinks.length > 0) {
+        creep.withdraw(nearbyLinks[0], RESOURCE_ENERGY);
+      } else {
+        utilsHarvest.getEnergyFromContainers(creep);
       }
-      creep.memory.state = state;
+    }
   }
 };
 
