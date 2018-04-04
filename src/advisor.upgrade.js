@@ -39,7 +39,7 @@ const UpgradeAdvisor = {
     let numUpgraders = 2;
     if (!link) {
       const roomStats = Memory.stats.rooms[room.name];
-      const totalEnergy = roomStats.storageEnergy + roomStats.spawnEnergy + roomStats.droppedEnergy;
+      const totalEnergy = roomStats.storageEnergy + roomStats.containerEnergy + roomStats.droppedEnergy;
 
       numUpgraders = Math.ceil(totalEnergy / 2000);
     }
