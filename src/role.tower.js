@@ -29,7 +29,8 @@ const roleTower = {
 
   findRepairTarget: function(tower, container) {
     const needs = container.getNeeds();
-    const repairNeed = _.filter(needs, n => n.type == "repair")[0];
+    const repairNeed = _.filter(needs, n => n.type == "repair"
+      && Game.getObjectById(n.target).room.name == tower.room.name)[0];
 
     if (!repairNeed) {
       return null;
