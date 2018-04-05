@@ -41,7 +41,7 @@ const UpgradeAdvisor = {
       const roomStats = Memory.stats.rooms[room.name];
       const totalEnergy = roomStats.storageEnergy + roomStats.containerEnergy + roomStats.droppedEnergy;
 
-      numUpgraders = Math.min(Math.ceil(totalEnergy / 2000), 5);
+      numUpgraders = Math.min(Math.ceil(totalEnergy / 5000), 5);
     }
 
     for (let i = 0; i < numUpgraders; i++) {
