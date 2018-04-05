@@ -13,24 +13,24 @@ let roleRefiller = {
         return;
       }
 
-        if (creep.memory.working && creep.carry.energy < 50) {
-            creep.memory.working = false;
-        }
-        if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.working = true;
-        }
+      if (creep.memory.working && creep.carry.energy < 50) {
+          creep.memory.working = false;
+      }
+      if (!creep.memory.working && creep.carry.energy == creep.carryCapacity) {
+          creep.memory.working = true;
+      }
 
-        if (creep.memory.working) {
-            if (!utilsEnergy.maybeRefillEnergy(creep)) {
-                creep.idle();
-            }
-        } else {
-          if (utilsHarvest.getEnergyFromContainers(creep, true)) {
-              return;
+      if (creep.memory.working) {
+          if (!utilsEnergy.maybeRefillEnergy(creep)) {
+              creep.idle();
           }
-
-          creep.idle();
+      } else {
+        if (utilsHarvest.getEnergyFromContainers(creep, true)) {
+            return;
         }
+
+        creep.idle();
+      }
     }
 };
 
