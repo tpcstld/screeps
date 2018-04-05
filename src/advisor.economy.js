@@ -36,7 +36,7 @@ const EconomyAdvisor = {
   getNeedsForSpawnRoom: function(room) {
     let needs = [];
 
-    const roomCreeps = room.find(FIND_MY_CREEPS);
+    const roomCreeps = room.find(Game.creeps, c => c.memory.homeRoom == room.name);
 
     if (roomCreeps.length < 3) {
       needs.push({
