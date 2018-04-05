@@ -37,7 +37,7 @@ const UpgradeAdvisor = {
     })[0];
 
     let numUpgraders = 2;
-    if (!link) {
+    if (!link || !room.memory.sourceLinkId) {
       const roomStats = Memory.stats.rooms[room.name];
       const totalEnergy = roomStats.storageEnergy + roomStats.containerEnergy + roomStats.droppedEnergy;
 
