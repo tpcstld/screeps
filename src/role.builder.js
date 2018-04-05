@@ -40,9 +40,16 @@ let roleBuilder = {
         creep.travelTo(target);
       }
     } else {
+      const spawnConstruction = creep.room.find(FIND_CONSTRUCTION_SITES, {
+        filter: c => c.structureType == STRUCTURE_SPAWN
+      })[0];
+      if (spawnConstruction) {
+        utilsHarvest.harvestRandom(creep, 5);
+      } else {
         if (!utilsHarvest.getEnergyFromContainers(creep)) {
             creep.idle();
         }
+      }
     }
   }
 };
