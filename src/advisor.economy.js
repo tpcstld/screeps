@@ -36,6 +36,11 @@ const EconomyAdvisor = {
   getNeedsForSpawnRoom: function(room) {
     let needs = [];
 
+    if (room.controller.level < 3) {
+      needs = needs.concat(this.fillSpawnNeedForRoom(room, 5, "general"));
+      return needs;
+    }
+
     const roomCreeps = _.filter(Game.creeps, c => c.memory.homeRoom == room.name);
 
     if (roomCreeps.length < 3) {
