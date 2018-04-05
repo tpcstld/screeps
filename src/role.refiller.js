@@ -9,6 +9,10 @@ let roleRefiller = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
+      if (creep.goHomeRoom()) {
+        return;
+      }
+
         if (creep.memory.working && creep.carry.energy < 50) {
             creep.memory.working = false;
         }
