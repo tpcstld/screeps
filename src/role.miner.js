@@ -24,6 +24,10 @@ let roleMiner = {
 
     if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
       creep.travelTo(travelTarget);
+    } else if (target != travelTarget) {
+      if (!creep.pos.isEqualTo(travelTarget.pos)) {
+        creep.travelTo(travelTarget);
+      }
     }
 
   }
