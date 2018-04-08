@@ -28,11 +28,12 @@ var roleUpgrader = {
         creep.travelTo(controller);
       }
     } else {
-      const nearbyLinks = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+      const link = creep.pos.findInRange(FIND_STRUCTURES, 1, {
           filter: s => s.structureType == STRUCTURE_LINK
-      });
-      if (nearbyLinks.length > 0) {
-        creep.withdraw(nearbyLinks[0], RESOURCE_ENERGY);
+      })[0];
+      const sourceLinkId = creep.room.memory.sourceLinkId;
+      if (link && sourceLinkId && link.id != sourceLinkId) {
+        creep.withdraw(link, RESOURCE_ENERGY);
       } else {
         utilsHarvest.getEnergyFromContainers(creep);
       }
