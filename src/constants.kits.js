@@ -19,7 +19,13 @@ const kits = {
       return resolveTemplate([WORK, CARRY, MOVE], Math.min(energy, 900));
     }
 
-    return resolveTemplate([WORK], Math.min(energy - 150, 1000)).concat([CARRY, MOVE, MOVE]);
+    let linkCreepEnergy = 900;
+    const storage = room.storage;
+    if (storage && storage.store[RESOURCE_ENERGY] >= 250000) {
+      linkCreepEnergy = 1000;
+    }
+
+    return resolveTemplate([WORK], Math.min(energy - 150, linkCreepEnergy)).concat([CARRY, MOVE, MOVE]);
   },
   'repair': (energy, room) => resolveTemplate([WORK, CARRY, MOVE], Math.min(energy, 800)),
   'build': (energy, room) => resolveTemplate([WORK, CARRY, MOVE], Math.min(energy, 800)),
