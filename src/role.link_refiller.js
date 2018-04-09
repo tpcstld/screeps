@@ -17,7 +17,17 @@ let roleLinkRefiller = {
         }
 
         if (creep.memory.building) {
-            utilsEnergy.maybeEnergizeLinks(creep);
+          const home = Game.rooms[creep.memory.homeRoom];
+          const target = home.find(FIND_STRUCTURES, {
+              filter: s => s.structureType == STRUCTURE_LINK
+                && s.energy < s.energyCapacity
+                && s.id == home.memory.sourceLinkId
+          })[0];
+          if (target) {
+            if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+              creep.travelTo(target);
+            }
+          }
         } else {
             utilsHarvest.getEnergyFromContainers(creep, true)
         }
