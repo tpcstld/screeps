@@ -33,7 +33,9 @@ var roleUpgrader = {
       })[0];
       const sourceLinkId = creep.room.memory.sourceLinkId;
       if (link && sourceLinkId && link.id != sourceLinkId) {
-        creep.withdraw(link, RESOURCE_ENERGY);
+        if (creep.withdraw(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+          creep.travelTo(link);
+        }
       } else {
         utilsHarvest.getEnergyFromContainers(creep);
       }
