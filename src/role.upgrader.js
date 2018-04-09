@@ -21,14 +21,14 @@ var roleUpgrader = {
       creep.memory.working = true;
     }
 
+    const homeRoom = Game.rooms[creep.memory.homeRoom];
+    const controller = homeRoom.controller;
     if (creep.memory.working) {
-      const homeRoom = Game.rooms[creep.memory.homeRoom];
-      const controller = homeRoom.controller;
       if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
         creep.travelTo(controller);
       }
     } else {
-      const link = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+      const link = controller.pos.findInRange(FIND_STRUCTURES, 3, {
           filter: s => s.structureType == STRUCTURE_LINK
       })[0];
       const sourceLinkId = creep.room.memory.sourceLinkId;
