@@ -26,6 +26,7 @@ const advisors = [
   require('advisor.defend'),
   require('advisor.economy'),
   require('advisor.upgrade'),
+  require('advisor.transport'),
   require('advisor.build'),
 ];
 
