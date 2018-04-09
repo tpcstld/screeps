@@ -35,6 +35,7 @@ const kits = {
   'link_refiller': (energy, room) => [CARRY, MOVE],
   'colonize': (energy, room) => [CLAIM, MOVE],
   'general': (energy, room) => [WORK, CARRY, MOVE],
+  'transport': (energy, room) => resolveTemplate([CARRY, CARRY, MOVE], Math.min(energy, 1200)),
 };
 
 module.exports = kits;

@@ -18,7 +18,13 @@ const TransportAdvisor = {
   },
 
   getSpawnNeeds: function(needs) {
-    return [];
+    needs = _.filter(needs, n => n.type == "transport");
+
+    return needs.map(n => ({
+          type: "spawn",
+          role: "transport",
+          room: Game.getObjectById(n.start).room.name
+    }));
   },
 
   // Transport some energy to this room.

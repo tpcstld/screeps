@@ -4,6 +4,7 @@ const ROLES = {
   'repair': require('role.repairer'),
   'build': require('role.builder'),
   'colonize': require('role.colonizer'),
+  'transport': require('role.transport'),
   'tower': require('role.tower'),
 };
 
