@@ -4,8 +4,6 @@ const utilsInfo = require('utils.info');
 
 const LogisticsAdvisor = {
 
-  RESOURCE_PER_RUNNER: 2500,
-
   getCreepNeeds: function() {
     let needs = [];
 
@@ -15,21 +13,22 @@ const LogisticsAdvisor = {
   },
 
   getSpawnNeeds: function(needs) {
-    needs = _.filter(needs, n => n.type == "transport");
+    needs = _.filter(needs, n => n.type == "gather");
     needs = _.groupBy(needs, n => Game.getObjectById(n.start).room.name);
 
     const newNeeds = [];
     for (let name in Game.rooms) {
       const totalEnergy = _.sum(needs[name], n => n.amount);
-      const numTransporters = _.filter(Game.creeps,
-        c => c.memory.role == "transport" && c.memory.homeRoom == name).length;
+      const numRunners = _.filter(Game.creeps,
+        c => c.memory.role == "run" && c.memory.homeRoom == name).length;
 
-      const numNewSpawns = Math.floor((totalEnergy / this.RESOURCE_PER_RUNNER) - numTransporters);
+      const numRequestedRunners = Math.min(Math.ceil((totalEnergy + 1500) / 2000), 3);
+      const numNewSpawns = numRequestedRunners - numRunners;
 
       for (let i = 0; i < numNewSpawns; i++) {
         newNeeds.push({
             type: "spawn",
-            role: "transport",
+            role: "run",
             room: name,
         });
       }
