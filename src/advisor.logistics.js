@@ -96,7 +96,7 @@ const LogisticsAdvisor = {
         }
       }
     }
-    return needs;
+    return _.sortBy(needs, n => -n.amount);
   },
 };
 
