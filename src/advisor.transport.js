@@ -1,3 +1,4 @@
+const utilsInfo = require('utils.info');
 // Equalize energy across rooms.
 
 const TransportAdvisor = {
@@ -7,6 +8,10 @@ const TransportAdvisor = {
 
     for (let name in Game.rooms) {
       const room = Game.rooms[name];
+
+      if (!utilsInfo.isRoomOwned(room)) {
+        continue;
+      }
 
       const lowEnergy = room.storage && room.storage.store[RESOURCE_ENERGY] < 250000;
       if (lowEnergy) {
@@ -29,6 +34,7 @@ const TransportAdvisor = {
 
   // Transport some energy to this room.
   getTransportEnergyNeed: function(room) {
+    // TODO: Filter for only owned rooms.
     let richRooms = _.filter(Game.rooms, r => r.storage && r.storage.store[RESOURCE_ENERGY] > 250000);
     richRooms = _.sortBy(richRooms, r => -(r.storage.store[RESOURCE_ENERGY]));
 
