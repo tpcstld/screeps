@@ -37,7 +37,11 @@ const processors = [
 const NeedContainer = require('NeedContainer');
 const NeedAssigner = require('NeedAssigner');
 
+const profiler = require('screeps-profiler');
+profiler.enable();
+
 module.exports.loop = function () {
+  profiler.wrap(function() {
     for(var i in Memory.creeps) {
         if(!Game.creeps[i]) {
             delete Memory.creeps[i];
@@ -90,4 +94,5 @@ module.exports.loop = function () {
     }
 
     loopStats.run(container);
+  });
 }
