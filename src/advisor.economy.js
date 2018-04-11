@@ -75,22 +75,6 @@ const EconomyAdvisor = {
     return needs;
   },
 
-  // Deploy runners depending on load.
-  requestRunnersForRoom: function(room) {
-    const storage = room.find(FIND_STRUCTURES, {
-        filter: s => s.structureType === STRUCTURE_STORAGE
-    });
-    let roomStats = Memory.stats.rooms[room.name];
-
-    let energy = roomStats.droppedEnergy;
-    if (storage.length > 0) {
-      energy = energy + roomStats.containerEnergy;
-    }
-    const numRunners = Math.min(Math.ceil((energy + 1500) / 2000), 3);
-
-    return this.fillSpawnNeedForRoom(room, numRunners, "run");
-  },
-
   requestLinkRefillersForRoom: function(room) {
     const links = room.find(FIND_STRUCTURES, {
         filter: s => s.structureType == STRUCTURE_LINK
