@@ -21,15 +21,11 @@ let roleRefiller = {
       }
 
       if (creep.memory.working) {
-          if (!utilsEnergy.maybeRefillEnergy(creep)) {
-              creep.idle();
-          }
+        utilsEnergy.maybeRefillEnergy(creep);
       } else {
         if (utilsHarvest.getEnergyFromContainers(creep, true)) {
             return;
         }
-
-        creep.idle();
       }
     }
 };
