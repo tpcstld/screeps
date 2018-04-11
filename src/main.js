@@ -1,5 +1,6 @@
 const PROTOTYPES = [
   require('prototype.creep'),
+  require('prototype.room'),
 ];
 
 const ROLES = {
