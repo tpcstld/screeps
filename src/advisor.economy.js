@@ -70,7 +70,6 @@ const EconomyAdvisor = {
       });
     }
 
-    needs = needs.concat(this.requestRunnersForRoom(room));
     needs = needs.concat(this.requestLinkRefillersForRoom(room));
 
     return needs;
