@@ -18,12 +18,12 @@ let roleLinkRefiller = {
 
         if (creep.memory.building) {
           const home = Game.rooms[creep.memory.homeRoom];
-          const target = home.find(FIND_STRUCTURES, {
-              filter: s => s.structureType == STRUCTURE_LINK
-                && s.energy < s.energyCapacity
-                && s.id == home.memory.sourceLinkId
-          })[0];
+          const target = Game.getObjectById(home.memory.sourceLinkId);
+
           if (target) {
+            if (target.energy >= target.energyCapacity) {
+              return;
+            }
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
               creep.travelTo(target);
             }
