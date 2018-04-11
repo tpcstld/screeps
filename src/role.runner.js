@@ -15,11 +15,11 @@ const roleRunner = {
     if (target) {
       return _.filter(needs, n => n.type == "gather"
         && n.target == target
-        && Game.getObjectById(n.target).room.name == creep.homeRoom);
+        && Game.getObjectById(n.target).room.name == creep.memory.homeRoom)[0];
     }
 
     return _.filter(needs, n => n.type == "gather"
-      && Game.getObjectById(n.target).room.name == creep.homeRoom);
+      && Game.getObjectById(n.target).room.name == creep.memory.homeRoom)[0];
   },
 
   run: function(creep, need) {
@@ -33,6 +33,10 @@ const roleRunner = {
     if (creep.memory.working) {
       utilsEnergy.dropAtContainer(creep);
     } else {
+      if (!need) {
+        return;
+      }
+
       const target = Game.getObjectById(need.target);
 
       if (!target) {
