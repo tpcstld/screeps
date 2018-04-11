@@ -56,13 +56,16 @@ const LogisticsAdvisor = {
           filter: r => r.amount >= 40
       });
 
+      const containers = room.find(FIND_STRUCTURES, {
+          filter: s => s.structureType == STRUCTURE_CONTAINER
+      });
+
       for (let i in droppedResources) {
         const resource = droppedResources[i];
         needs.push({
             type: "gather",
             resource: resource.resourceType,
-            start: resource.id,
-            target: room.storage.id,
+            target: resource.id,
             amount: resource.amount,
         });
       }
@@ -78,8 +81,7 @@ const LogisticsAdvisor = {
           needs.push({
               type: "gather",
               resource: "all",
-              start: container.id,
-              target: room.storage.id,
+              target: container.id,
               amount: _.sum(container.store)
           });
         }

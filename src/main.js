@@ -3,7 +3,6 @@ const PROTOTYPES = [
 ];
 
 const ROLES = {
-    'run': require('role.runner'),
     'attack': require('role.attacker'),
     'remoteMine': require('role.remote_miner'),
     'remoteRunner': require('role.remote_runner'),
