@@ -2,11 +2,6 @@ const utilsLoad = require('utils.load');
 
 let utilsHarvest = {
 
-    MINER_COUNT: {
-        "59f1a2a682100e1594f3a5b6": 4,
-        "59f1a2a682100e1594f3a5b7": 1
-    },
-
     getEnergyFromContainers: function(creep, force) {
         let target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
             filter: c => c.structureType === STRUCTURE_STORAGE

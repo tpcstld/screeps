@@ -41,6 +41,11 @@ const NeedAssigner = require('NeedAssigner');
 const profiler = require('screeps-profiler');
 profiler.enable();
 
+for (let i in advisors) {
+  const advisor = advisors[i];
+  profiler.registerClass(advisor, i);
+}
+
 module.exports.loop = function () {
   profiler.wrap(function() {
     for(var i in Memory.creeps) {
