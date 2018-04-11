@@ -30,6 +30,7 @@ const roleRunner = {
       creep.memory.working = true;
     }
 
+    creep.memory.target = null;
     if (creep.memory.working) {
       utilsEnergy.dropAtContainer(creep);
     } else {
