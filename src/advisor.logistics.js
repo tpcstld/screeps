@@ -18,6 +18,11 @@ const LogisticsAdvisor = {
 
     const newNeeds = [];
     for (let name in Game.rooms) {
+      const room = Game.rooms[name];
+      if (!utilsInfo.isRoomOwned(room)) {
+        continue;
+      }
+
       const totalEnergy = _.sum(needs[name], n => n.amount);
       const numRunners = _.filter(Game.creeps,
         c => c.memory.role == "run" && c.memory.homeRoom == name).length;
@@ -34,8 +39,7 @@ const LogisticsAdvisor = {
       }
     }
 
-    // Disable for now.
-    return [];
+    return newNeeds;
   },
 
   getPickupResourceNeeds: function() {
