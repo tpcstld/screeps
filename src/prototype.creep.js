@@ -4,9 +4,11 @@ Creep.prototype.idle = function() {
   const spawn = this.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: s => s.structureType == STRUCTURE_SPAWN
   });
-  this.travelTo(spawn, {
-      stuckValue: 8
-  });
+  if (!this.pos.isNearTo(spawn)) {
+    this.travelTo(spawn, {
+        stuckValue: 8
+    });
+  }
 };
 
 Creep.prototype.refund = function() {
