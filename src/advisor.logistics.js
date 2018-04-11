@@ -78,12 +78,21 @@ const LogisticsAdvisor = {
 
         for (let i in containers) {
           const container = containers[i];
+          const amount = _.sum(container.store);
           needs.push({
               type: "gather",
               resource: "all",
               target: container.id,
-              amount: _.sum(container.store)
+              amount: Math.min(1000, amount),
           });
+          if (amount > 1000) {
+            needs.push({
+                type: "gather",
+                resource: "all",
+                target: container.id,
+                amount: amount - 1000,
+            });
+          }
         }
       }
     }
