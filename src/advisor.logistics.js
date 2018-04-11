@@ -14,7 +14,7 @@ const LogisticsAdvisor = {
 
   getSpawnNeeds: function(needs) {
     needs = _.filter(needs, n => n.type == "gather");
-    needs = _.groupBy(needs, n => Game.getObjectById(n.start).room.name);
+    needs = _.groupBy(needs, n => Game.getObjectById(n.target).room.name);
 
     const newNeeds = [];
     for (let name in Game.rooms) {
