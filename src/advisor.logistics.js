@@ -80,9 +80,8 @@ const LogisticsAdvisor = {
           });
         }
       }
-
-      return needs;
     }
+    return needs;
   },
 };
 
